@@ -1,0 +1,58 @@
+name: P-Bandai restock check
+
+on:
+  schedule:
+    # Every hour, on the hour (UTC). GitHub may delay scheduled runs
+    # by 5-20 min under load — that's normal.
+    - cron: "0 * * * *"
+  workflow_dispatch:        # lets you run it manually from the Actions tab
+
+concurrency:
+  group: pbandai-check
+  cancel-in-progress: false
+
+permissions:
+  contents: write           # needed to commit state/seen.json back
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-v1
+
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Run check
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WATCH_URLS: ${{ vars.WATCH_URLS }}
+        run: python check.py
+
+      - name: Commit updated state
+        if: success()
+        run: |
+          git config user.name  "pbandai-bot"
+          git config user.email "actions@github.com"
+          git add state/seen.json
+          if git diff --staged --quiet; then
+            echo "no state change"
+          else
+            git commit -m "state: update seen items [skip ci]"
+            git push
+          fi
