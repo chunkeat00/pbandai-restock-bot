@@ -62,6 +62,22 @@ state 的 key 格式从 `<id>` 换成了 `<region>:<id>`（这样 SG 和 AU 同�
 2. 搜 **@userinfobot** → Start → 它回你的 `Id:` 就是 **CHAT_ID**
 3. 记得先给你自己的 bot 点一次 **Start**，否则它没权限给你发消息
 
+### 发给多个人 / 多个群
+
+`TELEGRAM_CHAT_ID` 支持**多个**，逗号或换行分隔：
+
+```
+123456789
+-1001234567890
+987654321
+```
+
+- 私聊 id 是**正数**，群组/频道是**负数**，别漏掉减号
+- 每个人都要先给 bot 点过 **Start**；群组要先把 bot 拉进群
+- `#` 开头的行当注释忽略，可以临时停掉某个收件人
+- 某个 id 挂了（对方 block 了 bot、bot 被踢出群）**不会影响其他人收信**，
+  只会在 log 里打一行 `delivery failed for: <id>`
+
 ---
 
 ## 二、部署到 GitHub Actions
@@ -137,7 +153,7 @@ DRY_RUN=1 python check.py     # 只打印不发消息
 | 变量 | 必填 | 说明 |
 |---|---|---|
 | `TELEGRAM_BOT_TOKEN` | ✅ | BotFather 给的 token |
-| `TELEGRAM_CHAT_ID` | ✅ | 你的 chat id |
+| `TELEGRAM_CHAT_ID` | ✅ | 一个或多个 chat id，逗号/换行分隔。群组是负数 |
 | `WATCH_URLS` | ✅ | 监控的列表页 URL，换行/逗号分隔。`#` 开头的行当注释忽略 |
 | `ALERT_ON_ALL` | — | `1` = 连售完的也通知（默认只通知能下单的） |
 | `STATE_FILE` | — | 默认 `state/seen.json` |

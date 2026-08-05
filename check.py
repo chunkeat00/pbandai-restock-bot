@@ -16,7 +16,8 @@ Why we filter in the scraper instead of trusting the URL:
 
 Env vars:
   TELEGRAM_BOT_TOKEN   (required)
-  TELEGRAM_CHAT_ID     (required)
+  TELEGRAM_CHAT_ID     (required) one or more chat ids, comma- or
+                       newline-separated. Groups/channels are negative ids.
   WATCH_URLS           (required) newline- or comma-separated listing URLs.
                        No default: an unset value aborts the run instead of
                        quietly falling back to URLs baked into this file.
@@ -46,7 +47,13 @@ from playwright.sync_api import sync_playwright
 # --------------------------------------------------------------------------- #
 
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
-CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+# One or more recipients, comma- or newline-separated. A group id is negative
+# (e.g. -1001234567890), so we must not strip leading "-".
+CHAT_IDS = [
+    c.strip() for c in re.split(r"[\n,;]+",
+                                os.environ.get("TELEGRAM_CHAT_ID", ""))
+    if c.strip() and not c.strip().startswith("#")
+]
 STATE_FILE = Path(os.environ.get("STATE_FILE", "state/seen.json"))
 MAX_PAGES = int(os.environ.get("MAX_PAGES", "5"))
 ALERT_ON_ALL = os.environ.get("ALERT_ON_ALL", "") == "1"
@@ -377,32 +384,49 @@ def save_state(state: dict) -> None:
 # Telegram
 # --------------------------------------------------------------------------- #
 
-def tg_send(text: str) -> None:
-    if DRY_RUN or not BOT_TOKEN or not CHAT_ID:
-        print("--- would send ---\n" + text + "\n------------------", flush=True)
-        return
-
+def _tg_send_one(chat_id: str, text: str) -> bool:
     api = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     payload = json.dumps({
-        "chat_id": CHAT_ID,
+        "chat_id": chat_id,
         "text": text,
         "parse_mode": "HTML",
         "disable_web_page_preview": False,
     }).encode()
 
-    req = urllib.request.Request(
-        api, data=payload, headers={"Content-Type": "application/json"}
-    )
     for attempt in range(3):
+        req = urllib.request.Request(
+            api, data=payload, headers={"Content-Type": "application/json"}
+        )
         try:
             with urllib.request.urlopen(req, timeout=25) as r:
                 body = json.loads(r.read().decode())
             if body.get("ok"):
-                return
-            print(f"telegram error: {body}", file=sys.stderr)
+                return True
+            desc = str(body.get("description", body))
+            print(f"telegram error for {chat_id}: {desc}", file=sys.stderr)
+            # Permanent failures: retrying will not help.
+            if any(s in desc.lower() for s in
+                   ("chat not found", "blocked", "kicked", "deactivated",
+                    "not enough rights", "bot was")):
+                return False
         except Exception as e:
-            print(f"telegram attempt {attempt + 1} failed: {e}", file=sys.stderr)
+            print(f"telegram attempt {attempt + 1} for {chat_id} failed: {e}",
+                  file=sys.stderr)
         time.sleep(2 * (attempt + 1))
+    return False
+
+
+def tg_send(text: str) -> None:
+    """Send to every configured recipient. One bad chat id must not stop
+    delivery to the others."""
+    if DRY_RUN or not BOT_TOKEN or not CHAT_IDS:
+        print(f"--- would send to {len(CHAT_IDS) or 0} chat(s) ---\n"
+              + text + "\n------------------", flush=True)
+        return
+
+    failed = [cid for cid in CHAT_IDS if not _tg_send_one(cid, text)]
+    if failed:
+        print(f"delivery failed for: {', '.join(failed)}", file=sys.stderr)
 
 
 def esc(s: str) -> str:
@@ -448,11 +472,19 @@ def main() -> int:
         print(f"WATCH_URLS contains non-URL entries: {bad}", file=sys.stderr)
         return 2
 
-    if not DRY_RUN and (not BOT_TOKEN or not CHAT_ID):
+    if not DRY_RUN and (not BOT_TOKEN or not CHAT_IDS):
         print("TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not set", file=sys.stderr)
         return 2
 
+    bad_ids = [c for c in CHAT_IDS if not re.fullmatch(r"-?\d+|@[\w]{5,}", c)]
+    if bad_ids:
+        print(f"TELEGRAM_CHAT_ID has malformed entries: {bad_ids}\n"
+              "Expected numeric ids (groups are negative, e.g. -1001234567890) "
+              "or public @channelname.", file=sys.stderr)
+        return 2
+
     print("[config] watching:\n  " + "\n  ".join(WATCH_URLS), flush=True)
+    print(f"[config] notifying {len(CHAT_IDS)} chat(s)", flush=True)
 
     items, ok = scrape_all()
     available = [it for it in items if ALERT_ON_ALL or is_available(it)]
