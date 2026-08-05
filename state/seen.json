@@ -1,5 +1,159 @@
 {
-  "initialized": false,
-  "items": {},
-  "updated_at": null
+  "initialized": true,
+  "items": {
+    "A2208641008": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "MG 1/100 CROSSBONE GUNDAM X2 Ver.Ka [Oct 2026 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2208641008"
+    },
+    "A2845076001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "MGSD WING GUNDAM ZERO EW[STRUCTURAL COATING/BLACK] [Dec 2026 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2845076001"
+    },
+    "A2848876002": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "METAL BUILD METEOR [MAR 2027 DELIVERY]",
+      "url": "https://p-bandai.com/sg/item/A2848876002"
+    },
+    "A2866726001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "ONE PIECE CARD GAME 4TH ANNIVERSARY SET",
+      "url": "https://p-bandai.com/sg/item/A2866726001"
+    },
+    "A2884010001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "DIGIMON CARD GAME TAMER’S SELECTION BOX VER. X ANTIBODY",
+      "url": "https://p-bandai.com/sg/item/A2884010001"
+    },
+    "A2891018002": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "GUNDAM CARD GAME 1ST ANNIVERSARY SET [APR 2027 DELIVERY]",
+      "url": "https://p-bandai.com/sg/item/A2891018002"
+    },
+    "A2897406001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "METAL STRUCTURE KAITAI-SHOU-KI RX-93 νGUNDAM OPTION PARTS LONDO BELL ENGINEERS",
+      "url": "https://p-bandai.com/sg/item/A2897406001"
+    },
+    "AZ005709001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE TRAFALGAR.LAW GOLDEN STATE WARRIORS",
+      "url": "https://p-bandai.com/sg/item/AZ005709001"
+    },
+    "AZ005710001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE YAMATO MILWAUKEE BUCKS",
+      "url": "https://p-bandai.com/sg/item/AZ005710001"
+    },
+    "N2823132002": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "STRICT-G Mobile Suit Gundam SEED FREEDOM GUNDAM Souvenir Jacket",
+      "url": "https://p-bandai.com/au/item/N2823132002"
+    },
+    "N2847886001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
+      "url": "https://p-bandai.com/au/item/N2847886001"
+    },
+    "N2847892001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
+      "url": "https://p-bandai.com/au/item/N2847892001"
+    },
+    "N2847893001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
+      "url": "https://p-bandai.com/au/item/N2847893001"
+    },
+    "N2847904001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
+      "url": "https://p-bandai.com/au/item/N2847904001"
+    },
+    "N2847907001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
+      "url": "https://p-bandai.com/au/item/N2847907001"
+    },
+    "N2847916001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
+      "url": "https://p-bandai.com/au/item/N2847916001"
+    },
+    "N2890904001": {
+      "first_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:53:55+00:00",
+      "present": true,
+      "price": "",
+      "status": "PRE-ORDER",
+      "title": "GUNDAM CARD GAME 1st Anniversary Set",
+      "url": "https://p-bandai.com/au/item/N2890904001"
+    }
+  },
+  "updated_at": "2026-08-05T06:53:56+00:00"
 }
