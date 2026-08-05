@@ -2,9 +2,14 @@ name: P-Bandai restock check
 
 on:
   schedule:
-    # Every hour, on the hour (UTC). GitHub may delay scheduled runs
-    # by 5-20 min under load — that's normal.
-    - cron: "0 * * * *"
+    # Every hour at :23 (UTC).
+    #
+    # Deliberately NOT "0 * * * *". Scheduled workflows share one global queue
+    # with every push and PR on GitHub, and the top of the hour is the worst
+    # spike — runs queued then are delayed and, often enough, dropped entirely.
+    # An off-peak minute is the single most effective fix. Any odd minute works;
+    # :23 is just a quiet one.
+    - cron: "23 * * * *"
   workflow_dispatch:        # lets you run it manually from the Actions tab
 
 concurrency:
