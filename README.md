@@ -1,73 +1,113 @@
 # P-Bandai Restock Bot
 
-每小时检查 P-Bandai SG 的商品列表，有**上新**或**补货**就发 Telegram 通知。
+每小时检查 P-Bandai 的商品列表，有**上新**或**补货**就发 Telegram 通知。
+只通知**能下单**的商品（PRE-ORDER / IN STOCK / COMING SOON），
+OUT OF STOCK 和 PRE-ORDER CLOSED 会自动过滤掉。
 
-默认监控：One Piece 系列（`_f_series=03-002`，状态 `Waiting,On`，按新到货排序）。
+默认监控 SG + AU 两个站的 One Piece 系列（`_f_series=03-002`）。
 
 ---
 
-## 一、拿 Telegram token 和 chat id（约 3 分钟）
+## ⚠️ 升级说明（v2）
 
-1. Telegram 里搜 **@BotFather** → `/newbot` → 起个名字 → 他会给你一串
-   `123456789:AAH...` 这就是 **BOT_TOKEN**。
-2. 搜到你刚建的 bot，点 **Start**，随便发一句 "hi"。
-3. 浏览器打开（把 `<TOKEN>` 换成你的 token）：
-   `https://api.telegram.org/bot<TOKEN>/getUpdates`
-   找 `"chat":{"id":123456789` — 那个数字就是 **CHAT_ID**。
+如果你已经在跑 v1，这次要改两个地方：
 
-> 想发到群组：把 bot 拉进群，在群里发一句话再看 `getUpdates`，群 id 是负数（例 `-1001234567890`）。
+### 1. 换掉 `WATCH_URLS`（重要）
+
+**P-Bandai 的 `_f_productStatuses` 参数不可靠。** 实测 2026-08：
+
+| URL 参数 | AU 站实际返回 |
+|---|---|
+| `_f_productStatuses=Waiting,On` | 19 件，**全部 OUT OF STOCK / PRE-ORDER CLOSED** ❌ |
+| `_f_productStatuses=On` | 0 件（正确，facet 显示 Available = 0）✅ |
+
+`Waiting,On` 这个组合被网站直接无视了。所以 v2 **不再依赖 URL 过滤**，
+改成读每张卡片上的状态标签自己判断。你要做的是把状态参数**去掉**：
+
+GitHub repo → Settings → Secrets and variables → Actions → **Variables** →
+`WATCH_URLS` 改成这两行：
+
+```
+https://p-bandai.com/sg/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival
+https://p-bandai.com/au/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival
+```
+
+`WATCH_URLS` 现在是**必填**，代码里没有硬编码的备用 URL。没设就直接 exit 2
+并打印怎么设，不会偷偷跑一份你早忘了的旧 URL。每次运行的 log 开头也会打印
+实际在监控哪几条，方便核对。
+
+### 2. 建议重置一次 state
+
+v1 会把页面底部 **RECOMMENDATIONS 轮播**里的商品（一堆高达）也当成结果抓进去，
+所以你现在的 `state/seen.json` 里有脏数据。v2 已经把抓取范围锁死在结果容器内，
+但旧记录还在。清一下：
+
+```bash
+git pull
+echo '{"initialized": false, "items": {}, "updated_at": null}' > state/seen.json
+git commit -am "reset state for v2" && git push
+```
+
+下次跑会重新发一条「已启动」的消息，然后恢复正常。
+（不清也能跑，只是会留一堆用不到的旧记录。）
+
+state 的 key 格式从 `<id>` 换成了 `<region>:<id>`（这样 SG 和 AU 同号商品不会撞车），
+旧记录会自动迁移成 `sg:` 前缀，不用你操心。
+
+---
+
+## 一、拿 Telegram token 和 chat id
+
+1. Telegram 搜 **@BotFather** → `/newbot` → 拿到 `123456789:AAH...` = **BOT_TOKEN**
+2. 搜 **@userinfobot** → Start → 它回你的 `Id:` 就是 **CHAT_ID**
+3. 记得先给你自己的 bot 点一次 **Start**，否则它没权限给你发消息
 
 ---
 
 ## 二、部署到 GitHub Actions
 
-1. 在 GitHub 新建一个 repo，把这个文件夹的内容全部 push 上去
-   （**包括 `.github/` 和 `state/`** — `.github` 是隐藏文件夹，别漏了）。
+1. push 到 GitHub（**包括 `.github/` 和 `state/`**，`.github` 是隐藏文件夹）
 
    ```bash
-   cd pbandai-restock-bot
    git init && git add -A && git commit -m "init"
    git branch -M main
    git remote add origin git@github.com:<你的用户名>/pbandai-restock-bot.git
    git push -u origin main
    ```
 
-2. repo → **Settings → Secrets and variables → Actions**：
-   - **Secrets** 标签页，New repository secret，加两个：
-     - `TELEGRAM_BOT_TOKEN`
-     - `TELEGRAM_CHAT_ID`
-   - **Variables** 标签页（可选）：`WATCH_URLS` — 想监控别的系列时用，
-     多个 URL 用换行分开。不设就用默认的 One Piece 那条。
+2. Settings → Secrets and variables → Actions → **Secrets**：
+   - `TELEGRAM_BOT_TOKEN`
+   - `TELEGRAM_CHAT_ID`
 
-3. repo → **Settings → Actions → General** → 最下面 **Workflow permissions**
-   选 **Read and write permissions** → Save。
-   （bot 要把 `state/seen.json` commit 回去记住看过哪些商品。）
+3. Settings → Actions → General → **Workflow permissions** →
+   选 **Read and write permissions** → Save
+   （bot 要把 `state/seen.json` commit 回去记住看过哪些商品）
 
-4. repo → **Actions** 标签页 → 左边选 *P-Bandai restock check* → **Run workflow**
-   手动跑一次。第一次跑会发一条「已启动，正在监控 N 件商品」，
-   之后只有真的上新/补货才会再通知你。
-
-搞定，之后每小时自动跑。
+4. Actions 标签页 → *P-Bandai restock check* → **Run workflow** 手动跑一次
 
 ---
 
 ## 三、注意事项
 
-- **免费额度**：public repo 的 Actions 是完全免费无限的。private repo 每月 2000
-  分钟，这个 bot 每次约 1-2 分钟 × 每天 24 次 ≈ 每月 900-1400 分钟，够但偏紧。
-  **建议把 repo 设成 public**（里面没有敏感信息，token 存在 Secrets 里）。
-- **定时会有延迟**：GitHub 的 cron 在高峰期会推迟 5-20 分钟，偶尔跳过一次。
-  想更准时/更快就得用自己的服务器。
-- **repo 60 天没活动**，GitHub 会自动停掉定时任务并发邮件提醒你，去点一下
-  Enable 就恢复。
-- **抓不到东西不会清空记录**：如果某次网站改版或被挡，脚本会以 exit code 1
-  退出并保留旧状态，不会误报一堆「上新」。这时 GitHub 会给你发一封 workflow
-  failed 的邮件——那就是在提醒你去看一眼。（嫌吵可以在 GitHub → Settings →
-  Notifications 关掉 Actions 失败邮件。）
-- **⚠️ 抓取逻辑还没在真实页面上验证过**：我这边没法访问 p-bandai.com，
-  解析逻辑是按通用结构写的（抓所有 `/item/` 链接再往上找卡片）。
-  第一次跑完看那条启动消息说监控了几件——如果是 20 件左右就对了，
-  如果是 0 件说明被挡或结构不一样，跟我说一声我来调。
+- **免费额度**：public repo 的 Actions 免费无限。private repo 每月 2000 分钟，
+  这个 bot 每小时约 1-2 分钟 ≈ 每月 900-1400 分钟，够但偏紧。**建议设成 public**
+  （没有敏感信息，token 在 Secrets 里）。
+- **定时会延迟**：GitHub cron 高峰期推迟 5-20 分钟，偶尔跳过。
+- **repo 60 天没活动**会自动停掉定时任务，去点一下 Enable 就恢复。
+- **抓不到会中止，不会清空记录**：脚本会检查结果容器 `.o-search-product`
+  在不在。找不到 → exit 1、保留旧状态，不会把整个目录当成「上新」误报一遍。
+  这时 GitHub 会发一封 workflow failed 邮件提醒你。
+- **AU 站目前 0 件可下单**（19 件全部售完/预购截止），所以短期内只会收到 SG 的通知。
+  这是正常的，不是 bot 坏了。
+
+### 抓取逻辑已在真实页面验证（2026-08-05）
+
+| 页面 | 抓到 | 可下单 | 状态标签 |
+|---|---|---|---|
+| SG One Piece | 4 件 | 4 件 | PRE-ORDER |
+| AU One Piece | 19 件 | 0 件 | OUT OF STOCK / PRE-ORDER CLOSED |
+
+两个站的推荐位商品都已正确排除（SG 8 件、AU 8 件高达）。
 
 ---
 
@@ -77,36 +117,43 @@
 pip install -r requirements.txt
 python -m playwright install chromium
 
-# 只打印不发消息，先看抓得对不对
-DRY_RUN=1 python check.py
+export WATCH_URLS='https://p-bandai.com/sg/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival
+https://p-bandai.com/au/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival'
 
-# 真发
-export TELEGRAM_BOT_TOKEN=xxx
-export TELEGRAM_CHAT_ID=xxx
-python check.py
+DRY_RUN=1 python check.py     # 只打印不发消息
 ```
 
 ---
 
-## 五、想监控别的系列？
+## 五、换别的系列
 
-在 P-Bandai 网站上筛选好，把浏览器地址栏的 URL 复制下来，放进
-`WATCH_URLS` 变量即可（多条换行分隔）。例如：
-
-```
-https://p-bandai.com/sg/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival&_f_productStatuses=Waiting,On
-https://p-bandai.com/sg/series/gundam-series?offset=0&limit=20&sortType=NewArrival&_f_productStatuses=Waiting,On
-```
+在网站上筛选好，复制地址栏 URL 放进 `WATCH_URLS`（多条换行分隔）。
+**建议把 `_f_productStatuses=...` 删掉**——反正脚本自己会过滤，留着反而可能触发上面那个 bug。
 
 ---
 
-## 六、环境变量一览
+## 六、环境变量
 
 | 变量 | 必填 | 说明 |
 |---|---|---|
 | `TELEGRAM_BOT_TOKEN` | ✅ | BotFather 给的 token |
 | `TELEGRAM_CHAT_ID` | ✅ | 你的 chat id |
-| `WATCH_URLS` | — | 要监控的列表页 URL，换行/逗号分隔 |
+| `WATCH_URLS` | ✅ | 监控的列表页 URL，换行/逗号分隔。`#` 开头的行当注释忽略 |
+| `ALERT_ON_ALL` | — | `1` = 连售完的也通知（默认只通知能下单的） |
 | `STATE_FILE` | — | 默认 `state/seen.json` |
 | `MAX_PAGES` | — | 最多翻几页，默认 5 |
 | `DRY_RUN` | — | `1` = 只打印不发送 |
+
+---
+
+## 七、什么算「能下单」
+
+用排除法：卡片标签里含下面任一关键词就跳过，其余全部通知。
+这样即使 Bandai 出了个没见过的新标签，也不会被误杀。
+
+```
+OUT OF STOCK / SOLD OUT / CLOSED / NO LONGER AVAILABLE /
+END OF SALE / SALE ENDED / ENDED / SUSPENDED / CANCELLED / NOT AVAILABLE
+```
+
+改的话见 `check.py` 里的 `UNAVAILABLE_MARKERS`。
