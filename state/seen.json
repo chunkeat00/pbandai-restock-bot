@@ -3,7 +3,7 @@
   "items": {
     "A2208641008": {
       "first_seen": "2026-08-05T06:53:55+00:00",
-      "last_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:59:10+00:00",
       "present": true,
       "price": "",
       "status": "PRE-ORDER",
@@ -12,7 +12,7 @@
     },
     "A2845076001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
-      "last_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:59:10+00:00",
       "present": true,
       "price": "",
       "status": "PRE-ORDER",
@@ -21,7 +21,7 @@
     },
     "A2848876002": {
       "first_seen": "2026-08-05T06:53:55+00:00",
-      "last_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:59:10+00:00",
       "present": true,
       "price": "",
       "status": "PRE-ORDER",
@@ -30,7 +30,7 @@
     },
     "A2866726001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
-      "last_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:59:10+00:00",
       "present": true,
       "price": "",
       "status": "PRE-ORDER",
@@ -39,7 +39,7 @@
     },
     "A2884010001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
-      "last_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:59:10+00:00",
       "present": true,
       "price": "",
       "status": "PRE-ORDER",
@@ -48,7 +48,7 @@
     },
     "A2891018002": {
       "first_seen": "2026-08-05T06:53:55+00:00",
-      "last_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:59:10+00:00",
       "present": true,
       "price": "",
       "status": "PRE-ORDER",
@@ -57,7 +57,7 @@
     },
     "A2897406001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
-      "last_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:59:10+00:00",
       "present": true,
       "price": "",
       "status": "PRE-ORDER",
@@ -66,7 +66,7 @@
     },
     "AZ005709001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
-      "last_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:59:10+00:00",
       "present": true,
       "price": "",
       "status": "PRE-ORDER",
@@ -75,7 +75,7 @@
     },
     "AZ005710001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
-      "last_seen": "2026-08-05T06:53:55+00:00",
+      "last_seen": "2026-08-05T06:59:10+00:00",
       "present": true,
       "price": "",
       "status": "PRE-ORDER",
@@ -85,7 +85,7 @@
     "N2823132002": {
       "first_seen": "2026-08-05T06:53:55+00:00",
       "last_seen": "2026-08-05T06:53:55+00:00",
-      "present": true,
+      "present": false,
       "price": "",
       "status": "PRE-ORDER",
       "title": "STRICT-G Mobile Suit Gundam SEED FREEDOM GUNDAM Souvenir Jacket",
@@ -94,7 +94,7 @@
     "N2847886001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
       "last_seen": "2026-08-05T06:53:55+00:00",
-      "present": true,
+      "present": false,
       "price": "",
       "status": "PRE-ORDER",
       "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
@@ -103,7 +103,7 @@
     "N2847892001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
       "last_seen": "2026-08-05T06:53:55+00:00",
-      "present": true,
+      "present": false,
       "price": "",
       "status": "PRE-ORDER",
       "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
@@ -112,7 +112,7 @@
     "N2847893001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
       "last_seen": "2026-08-05T06:53:55+00:00",
-      "present": true,
+      "present": false,
       "price": "",
       "status": "PRE-ORDER",
       "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
@@ -121,7 +121,7 @@
     "N2847904001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
       "last_seen": "2026-08-05T06:53:55+00:00",
-      "present": true,
+      "present": false,
       "price": "",
       "status": "PRE-ORDER",
       "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
@@ -130,7 +130,7 @@
     "N2847907001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
       "last_seen": "2026-08-05T06:53:55+00:00",
-      "present": true,
+      "present": false,
       "price": "",
       "status": "PRE-ORDER",
       "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
@@ -139,7 +139,7 @@
     "N2847916001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
       "last_seen": "2026-08-05T06:53:55+00:00",
-      "present": true,
+      "present": false,
       "price": "",
       "status": "PRE-ORDER",
       "title": "Global \"Gundam\" Poll 2025 Commemorative Illustration GUNDAM F91 Tapestry",
@@ -148,12 +148,12 @@
     "N2890904001": {
       "first_seen": "2026-08-05T06:53:55+00:00",
       "last_seen": "2026-08-05T06:53:55+00:00",
-      "present": true,
+      "present": false,
       "price": "",
       "status": "PRE-ORDER",
       "title": "GUNDAM CARD GAME 1st Anniversary Set",
       "url": "https://p-bandai.com/au/item/N2890904001"
     }
   },
-  "updated_at": "2026-08-05T06:53:56+00:00"
+  "updated_at": "2026-08-05T06:59:10+00:00"
 }
