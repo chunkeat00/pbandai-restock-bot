@@ -1,1 +1,282 @@
-{"initialized": false, "items": {}, "updated_at": null}
+{
+  "initialized": true,
+  "items": {
+    "au:N2829153001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌51.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Official Playmat Limited Edition Vol.4",
+      "url": "https://p-bandai.com/au/item/N2829153001"
+    },
+    "au:N2829516001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌43.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -Best Selection Vol.5-",
+      "url": "https://p-bandai.com/au/item/N2829516001"
+    },
+    "au:N2829516005": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌43.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -Best Selection Vol.5-[February 2026 Delivery]",
+      "url": "https://p-bandai.com/au/item/N2829516005"
+    },
+    "au:N2835216001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌120.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME ONE PIECE Heroines Special Set",
+      "url": "https://p-bandai.com/au/item/N2835216001"
+    },
+    "au:N2835217001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌340.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Japanese 3rd ANNIVERSARY SET",
+      "url": "https://p-bandai.com/au/item/N2835217001"
+    },
+    "au:N2856354001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌200.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME English Version 3rd Anniversary Set",
+      "url": "https://p-bandai.com/au/item/N2856354001"
+    },
+    "au:N2860266001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌51.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Official Playmat Limited Edition Vol.5",
+      "url": "https://p-bandai.com/au/item/N2860266001"
+    },
+    "au:N2863371001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌43.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -Best Selection Vol.6-",
+      "url": "https://p-bandai.com/au/item/N2863371001"
+    },
+    "au:N2863372001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌43.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -Best Selection vol.7-",
+      "url": "https://p-bandai.com/au/item/N2863372001"
+    },
+    "au:N2863373001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌51.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Official Playmat Limited Edition vol.6",
+      "url": "https://p-bandai.com/au/item/N2863373001"
+    },
+    "au:N2863455001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌35.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -Live Action Edition vol.2 Straw Hat Crew-",
+      "url": "https://p-bandai.com/au/item/N2863455001"
+    },
+    "au:N2863455002": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌35.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -Live Action Edition vol.2 Straw Hat Crew- [November 2026 Delivery]",
+      "url": "https://p-bandai.com/au/item/N2863455002"
+    },
+    "au:N2881648002": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "OUT OF STOCK"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌52.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -Ace & Sabo & Luffy-",
+      "url": "https://p-bandai.com/au/item/N2881648002"
+    },
+    "au:N2883032001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌35.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -Live Action Edition vol.2 Baroque Works-",
+      "url": "https://p-bandai.com/au/item/N2883032001"
+    },
+    "au:N2883032002": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌35.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -Live Action Edition vol.2 Baroque Works-[November 2026 Delivery]",
+      "url": "https://p-bandai.com/au/item/N2883032002"
+    },
+    "au:N2903432001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌18.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -29th Anniversary Edition-",
+      "url": "https://p-bandai.com/au/item/N2903432001"
+    },
+    "au:N2903432003": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌18.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -29th Anniversary Edition-",
+      "url": "https://p-bandai.com/au/item/N2903432003"
+    },
+    "au:N2903432004": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌18.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Premium Card Collection -29th Anniversary Edition-",
+      "url": "https://p-bandai.com/au/item/N2903432004"
+    },
+    "au:N2904549002": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "OUT OF STOCK"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": false,
+      "price": "AU$‌148.00 (INCL. GST)",
+      "region": "au",
+      "title": "ONE PIECE CARD GAME Chinese 3rd Anniversary Set",
+      "url": "https://p-bandai.com/au/item/N2904549002"
+    },
+    "sg:A2866726001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": true,
+      "price": "SG$‌163.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME 4TH ANNIVERSARY SET",
+      "url": "https://p-bandai.com/sg/item/A2866726001"
+    },
+    "sg:A2894586001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": true,
+      "price": "SG$‌173.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "PORTRAIT.OF.PIRATES ONE PIECE “S.O.C” SANJI VER.R",
+      "url": "https://p-bandai.com/sg/item/A2894586001"
+    },
+    "sg:AZ005709001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": true,
+      "price": "SG$‌118.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE TRAFALGAR.LAW GOLDEN STATE WARRIORS",
+      "url": "https://p-bandai.com/sg/item/AZ005709001"
+    },
+    "sg:AZ005710001": {
+      "first_seen": "2026-08-05T07:37:22+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-08-05T07:37:22+00:00",
+      "present": true,
+      "price": "SG$‌159.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE YAMATO MILWAUKEE BUCKS",
+      "url": "https://p-bandai.com/sg/item/AZ005710001"
+    }
+  },
+  "updated_at": "2026-08-05T07:37:23+00:00"
+}
