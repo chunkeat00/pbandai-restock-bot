@@ -2,15 +2,18 @@ name: P-Bandai restock check
 
 on:
   schedule:
-    # Every hour at :23 (UTC).
+    # 备胎，不是主力。主触发是 Cloudflare Worker，每小时 :23 打
+    # workflow_dispatch API 过来（见 README「外部定时触发」）。
     #
-    # Deliberately NOT "0 * * * *". Scheduled workflows share one global queue
-    # with every push and PR on GitHub, and the top of the hour is the worst
-    # spike — runs queued then are delayed and, often enough, dropped entirely.
-    # An off-peak minute is the single most effective fix. Any odd minute works;
-    # :23 is just a quiet one.
-    - cron: "23 * * * *"
-  workflow_dispatch:        # lets you run it manually from the Actions tab
+    # GitHub 自己的 schedule 是 best-effort：高负载时不只是延迟，会直接把
+    # 任务丢掉不跑。实测这个 repo，`0 * * * *` 是 0/5，`23 * * * *` 是 2/15。
+    # 换个冷门分钟只能提高概率，治不了根，所以才加了外部触发。
+    #
+    # 设在 :53 而不是 :23，是为了跟 Cloudflare 错开半小时——真要靠它兜底时，
+    # 覆盖间隔不会变成整整两小时。两边同时触发也没事，下面的 concurrency
+    # 会让后到的那次排队等前一次跑完，不会两个一起 git push 打架。
+    - cron: "53 * * * *"
+  workflow_dispatch:        # Cloudflare Worker 和 Actions 页面手动运行都走这个
 
 concurrency:
   group: pbandai-check
