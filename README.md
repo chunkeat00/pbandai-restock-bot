@@ -160,7 +160,49 @@ Personal access tokens → Fine-grained tokens）：Repository access 只勾
 Worker 的 `GITHUB_PAT` secret，别的都不用动。
 
 怎么确认它还活着：GitHub Actions 页面看运行记录，正常情况下每小时应该有一条
-`workflow_dispatch`。连续几小时空白就是 Worker 或 PAT 出问题了。
+`workflow_dispatch`。连续几小时空白就是 Worker 或 PAT 出问题了。不想靠肉眼盯，
+就配下面的掉线告警。
+
+### 掉线告警（dead man's switch）
+
+前面那些失败模式里，有一类是**这套系统自己报不了的**：PAT 过期、Worker 挂了、
+GitHub runner 根本没启动。脚本压根没跑起来，谈何发通知？GitHub 的失败邮件也只在
+workflow **跑了并且失败**时才发——彻底没跑是不会有任何动静的。
+
+解法是反过来：**让脚本定时报平安，超时没报就告警**。用 healthchecks.io（免费）：
+
+1. 注册 → **Add Check** → 起名 `pbandai-restock`
+2. **Period** 设 `1 hour`，**Grace Time** 设 `1 hour`
+   （这样偶尔漏一次不会吵你，连续 2 小时没动静才发邮件）
+3. 复制它给的 ping URL（形如 `https://hc-ping.com/<uuid>`）
+4. 存进 GitHub repo → Settings → Secrets and variables → Actions → **Secrets** →
+   `HEALTHCHECK_URL`
+
+**这个 URL 要当密码看**，谁拿到都能替你报平安，把告警骗过去，所以放 Secrets 不是 Variables。
+
+脚本会打三种 ping：
+
+| 时机 | ping | 作用 |
+|---|---|---|
+| 开跑 | `/start` | 让 healthchecks 知道这次跑了多久 |
+| `exit 0` | 裸 URL | 报平安 |
+| 非 0 或崩溃 | `/fail` | 立刻告警，body 带上 exit code 或完整 traceback |
+
+覆盖到的情况：
+
+| 出了什么事 | 谁来告诉你 |
+|---|---|
+| PAT 过期 / Worker 挂了 / runner 没起来 | **healthchecks 超时告警**（只有这个能报） |
+| p-bandai 改版导致抓不到（exit 1） | `/fail` ping + GitHub 失败邮件 |
+| 配置写错（exit 2） | `/fail` ping + GitHub 失败邮件 |
+| Python 崩溃 | `/fail` ping（body 里有 traceback）+ GitHub 失败邮件 |
+
+两个设计上的取舍：
+
+- **不设 `HEALTHCHECK_URL` 就自动关闭**，整个功能是可选的
+- **ping 失败绝不影响主流程**——只往 stderr 打一行日志，不改 exit code。
+  因为"ping 挂了"本身比"因为 ping 挂了导致整个 bot 挂了"轻得多
+- **`DRY_RUN=1` 不会 ping**，免得你本地调试一下就把线上的告警给压住了
 
 ---
 
@@ -183,7 +225,10 @@ Worker 的 `GITHUB_PAT` secret，别的都不用动。
   Cloudflare 的 `workflow_dispatch` 也不受影响，照跑。
 - **抓不到会中止，不会清空记录**：脚本会检查结果容器 `.o-search-product`
   在不在。找不到 → exit 1、保留旧状态，不会把整个目录当成「上新」误报一遍。
-  这时 GitHub 会发一封 workflow failed 邮件提醒你。
+  这时 GitHub 会发一封 workflow failed 邮件提醒你，healthchecks 那边也会收到
+  一个 `/fail` ping。
+- **bot 悄悄停掉是最危险的情况**（PAT 过期、Worker 挂了），因为没有任何东西会报错。
+  配了「掉线告警」才有兜底，强烈建议配上。
 - **AU 站目前 0 件可下单**（19 件全部售完/预购截止），所以短期内只会收到 SG 的通知。
   这是正常的，不是 bot 坏了。
 
@@ -226,6 +271,7 @@ DRY_RUN=1 python check.py     # 只打印不发消息
 | `TELEGRAM_BOT_TOKEN` | ✅ | BotFather 给的 token |
 | `TELEGRAM_CHAT_ID` | ✅ | 一个或多个 chat id，逗号/换行分隔。群组是负数 |
 | `WATCH_URLS` | ✅ | 监控的列表页 URL，换行/逗号分隔。`#` 开头的行当注释忽略 |
+| `HEALTHCHECK_URL` | — | healthchecks.io 的 ping URL。不设=关闭掉线告警。当密码看，放 Secrets |
 | `ALERT_ON_ALL` | — | `1` = 连售完的也通知（默认只通知能下单的） |
 | `STATE_FILE` | — | 默认 `state/seen.json` |
 | `MAX_PAGES` | — | 最多翻几页，默认 5 |

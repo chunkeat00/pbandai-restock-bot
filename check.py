@@ -35,6 +35,7 @@ import os
 import re
 import sys
 import time
+import traceback
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -58,6 +59,12 @@ STATE_FILE = Path(os.environ.get("STATE_FILE", "state/seen.json"))
 MAX_PAGES = int(os.environ.get("MAX_PAGES", "5"))
 ALERT_ON_ALL = os.environ.get("ALERT_ON_ALL", "") == "1"
 DRY_RUN = os.environ.get("DRY_RUN", "") == "1"
+
+# Dead man's switch (healthchecks.io ping URL). Optional — unset means off.
+# This is the only thing that catches a *silent* stop: an expired PAT, a dead
+# Cloudflare Worker, a runner that never started. Nothing inside this script
+# can report those, because the script never runs.
+HEALTHCHECK_URL = os.environ.get("HEALTHCHECK_URL", "").strip()
 
 # No hardcoded fallback on purpose. If WATCH_URLS is unset the run aborts
 # loudly, rather than silently monitoring URLs baked into the source that you
@@ -459,6 +466,26 @@ def send_batched(header: str, blocks: list[str]) -> None:
 
 
 # --------------------------------------------------------------------------- #
+# Dead man's switch
+# --------------------------------------------------------------------------- #
+
+def hc_ping(suffix: str = "", body: str = "") -> None:
+    """Ping healthchecks.io. Silence is the alert, so this must never raise and
+    never change the exit code — a failed ping is strictly less bad than a run
+    that fails *because* the ping failed."""
+    if not HEALTHCHECK_URL or DRY_RUN:
+        return
+    url = HEALTHCHECK_URL.rstrip("/") + suffix
+    try:
+        # No data -> GET. healthchecks caps the body at 100 KB; keep it small.
+        req = urllib.request.Request(url, data=body.encode()[:10000] or None)
+        with urllib.request.urlopen(req, timeout=10):
+            pass
+    except Exception as e:
+        print(f"healthcheck ping failed ({suffix or '/'}): {e}", file=sys.stderr)
+
+
+# --------------------------------------------------------------------------- #
 # Main
 # --------------------------------------------------------------------------- #
 
@@ -561,4 +588,12 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    hc_ping("/start")
+    try:
+        code = main()
+    except BaseException:
+        # Includes the crashes main() never gets to report on itself.
+        hc_ping("/fail", traceback.format_exc())
+        raise
+    hc_ping("" if code == 0 else "/fail", f"exit={code}")
+    sys.exit(code)

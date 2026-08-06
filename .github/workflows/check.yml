@@ -52,6 +52,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           WATCH_URLS: ${{ vars.WATCH_URLS }}
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}   # 没设就自动关闭
         run: python check.py
 
       - name: Commit updated state
