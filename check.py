@@ -325,9 +325,17 @@ def scrape_url(page, url: str) -> tuple[list[dict], bool]:
     return list(found.values()), any_ok
 
 
-def scrape_all() -> tuple[list[dict], bool]:
+def scrape_all() -> tuple[list[dict], dict[str, bool]]:
+    """Returns (items, ok_by_region).
+
+    Per region, not one global flag: one storefront going dark must not stop
+    the others from being compared and alerted on. A region counts as ok only
+    if *every* one of its URLs read cleanly — `present` is recomputed from the
+    full region, so a half-read region would look like its missing half went
+    away, which reads as a restock the next time it comes back.
+    """
     all_items: dict[str, dict] = {}
-    all_ok = True
+    ok_by_region: dict[str, bool] = {}
     with sync_playwright() as p:
         browser = p.chromium.launch(
             args=["--disable-blink-features=AutomationControlled"]
@@ -339,17 +347,18 @@ def scrape_all() -> tuple[list[dict], bool]:
         )
         page = ctx.new_page()
         for url in WATCH_URLS:
+            region = region_of(url)
             print(f"[scrape] {url}", flush=True)
             try:
                 items, ok = scrape_url(page, url)
-                all_ok = all_ok and ok
                 for it in items:
                     all_items.setdefault(it["key"], it)
             except Exception as e:
-                all_ok = False
+                ok = False
                 print(f"  !! failed: {e}", file=sys.stderr)
+            ok_by_region[region] = ok_by_region.get(region, True) and ok
         browser.close()
-    return list(all_items.values()), all_ok
+    return list(all_items.values()), ok_by_region
 
 
 # --------------------------------------------------------------------------- #
@@ -513,16 +522,22 @@ def main() -> int:
     print("[config] watching:\n  " + "\n  ".join(WATCH_URLS), flush=True)
     print(f"[config] notifying {len(CHAT_IDS)} chat(s)", flush=True)
 
-    items, ok = scrape_all()
-    available = [it for it in items if ALERT_ON_ALL or is_available(it)]
-    print(f"[scrape] grid_ok={ok} scraped={len(items)} "
-          f"alertable={len(available)}", flush=True)
+    items, ok_by_region = scrape_all()
+    good = {r for r, ok in ok_by_region.items() if ok}
+    bad = sorted(r for r, ok in ok_by_region.items() if not ok)
 
-    if not ok:
-        # Layout change, bot block, or network trouble. Bail without touching
-        # state so the next good run doesn't report the whole catalogue as new.
-        print("results grid missing on at least one URL — state untouched",
-              file=sys.stderr)
+    # Whatever a failed region did return is partial. Drop it — letting it
+    # through would make the items it missed look like they went away.
+    items = [it for it in items if it["region"] in good]
+    available = [it for it in items if ALERT_ON_ALL or is_available(it)]
+    print(f"[scrape] ok={sorted(good) or '-'} failed={bad or '-'} "
+          f"scraped={len(items)} alertable={len(available)}", flush=True)
+
+    if not good:
+        # Every region dark: layout change, bot block, or network trouble.
+        # Bail without touching state so the next good run doesn't report the
+        # whole catalogue as new.
+        print("no region scraped cleanly — state untouched", file=sys.stderr)
         return 1
 
     state = load_state()
@@ -558,7 +573,10 @@ def main() -> int:
 
     scraped_keys = {it["key"] for it in items}
     for key, rec in known.items():
-        if key not in scraped_keys:
+        # Only a region we actually read can testify that an item is gone.
+        # Records belonging to a failed region are left exactly as they were.
+        region = rec.get("region") or key.split(":", 1)[0]
+        if key not in scraped_keys and region in good:
             rec["present"] = False
 
     if not state.get("initialized"):
@@ -566,7 +584,8 @@ def main() -> int:
             "✅ <b>P-Bandai restock bot 已启动</b>\n"
             f"监控中：{len(WATCH_URLS)} 个列表，共 {len(known)} 件商品，"
             f"其中现在可下单 {len(available)} 件。\n"
-            "之后有上新或补货才会再通知你。"
+            + (f"⚠️ 读不到：{', '.join(r.upper() for r in bad)}\n" if bad else "")
+            + "之后有上新或补货才会再通知你。"
         )
     else:
         if new_items:
@@ -578,12 +597,34 @@ def main() -> int:
         if not new_items and not back_items:
             print("no changes", flush=True)
 
+    # A storefront going dark (or coming back) is worth one message per
+    # transition, not one per hour. Anything that stays broken is the dead
+    # man's switch's job, not Telegram's.
+    prev_bad = set(state.get("failed_regions") or [])
+    if state.get("initialized") and set(bad) != prev_bad:
+        if bad:
+            tg_send(
+                "⚠️ <b>P-Bandai 抓取异常</b>\n"
+                f"读不到商品列表：{', '.join(r.upper() for r in bad)}\n"
+                f"其余 {len(good)} 个站照常监控中。异常站点的记录已冻结，"
+                "不会误报上新或补货。"
+            )
+        else:
+            tg_send(
+                "✅ <b>P-Bandai 抓取已恢复</b>\n"
+                f"{', '.join(r.upper() for r in sorted(prev_bad))} 恢复正常。"
+            )
+
     state["items"] = known
     state["initialized"] = True
+    state["failed_regions"] = bad
     save_state(state)
 
     print(f"[done] new={len(new_items)} back={len(back_items)} "
-          f"tracked={len(known)}", flush=True)
+          f"tracked={len(known)} failed={bad or '-'}", flush=True)
+    # Partial failure is not a run failure: the good regions were compared and
+    # alerted on, and Telegram already said which region is dark. Failing here
+    # would just turn the dead man's switch red every hour for no new reason.
     return 0
 
 
