@@ -2,6 +2,18 @@
   "failed_regions": [],
   "initialized": true,
   "items": {
+    "au:A2870005001": {
+      "first_seen": "2026-08-20T09:23:49+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-08-20T09:23:49+00:00",
+      "present": true,
+      "price": "AU$‌148.00 (INCL. GST)",
+      "region": "au",
+      "title": "LUFFY’s ARTCANVAS 1/8 -20th Anniversary-",
+      "url": "https://p-bandai.com/au/item/A2870005001"
+    },
     "au:N2829153001": {
       "first_seen": "2026-08-05T07:37:22+00:00",
       "flags": [
@@ -242,6 +254,18 @@
       "title": "ONE PIECE CARD GAME 4TH ANNIVERSARY SET",
       "url": "https://p-bandai.com/sg/item/A2866726001"
     },
+    "sg:A2870005001": {
+      "first_seen": "2026-08-20T09:23:49+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-08-20T09:23:49+00:00",
+      "present": true,
+      "price": "SG$‌71.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "LUFFY’s ARTCANVAS 1/8 -20th Anniversary-",
+      "url": "https://p-bandai.com/sg/item/A2870005001"
+    },
     "sg:A2894586001": {
       "first_seen": "2026-08-05T07:37:22+00:00",
       "flags": [
@@ -259,7 +283,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-20T09:23:49+00:00",
       "present": true,
       "price": "SG$‌118.00 (INCL. TAX)",
       "region": "sg",
@@ -271,7 +295,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-20T09:23:49+00:00",
       "present": true,
       "price": "SG$‌159.00 (INCL. TAX)",
       "region": "sg",
@@ -279,5 +303,5 @@
       "url": "https://p-bandai.com/sg/item/AZ005710001"
     }
   },
-  "updated_at": "2026-08-20T08:23:48+00:00"
+  "updated_at": "2026-08-20T09:23:51+00:00"
 }
