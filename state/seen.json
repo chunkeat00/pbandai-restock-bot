@@ -5,10 +5,10 @@
     "au:A2870005001": {
       "first_seen": "2026-08-20T09:23:49+00:00",
       "flags": [
-        "PRE-ORDER"
+        "OUT OF STOCK"
       ],
-      "last_seen": "2026-08-21T08:03:47+00:00",
-      "present": true,
+      "last_seen": "2026-08-21T08:24:15+00:00",
+      "present": false,
       "price": "AU$‌148.00 (INCL. GST)",
       "region": "au",
       "title": "LUFFY’s ARTCANVAS 1/8 -20th Anniversary-",
@@ -19,7 +19,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌51.00 (INCL. GST)",
       "region": "au",
@@ -31,7 +31,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌43.00 (INCL. GST)",
       "region": "au",
@@ -43,7 +43,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌43.00 (INCL. GST)",
       "region": "au",
@@ -55,7 +55,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌120.00 (INCL. GST)",
       "region": "au",
@@ -67,7 +67,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌340.00 (INCL. GST)",
       "region": "au",
@@ -79,7 +79,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌200.00 (INCL. GST)",
       "region": "au",
@@ -91,7 +91,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌51.00 (INCL. GST)",
       "region": "au",
@@ -103,7 +103,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌43.00 (INCL. GST)",
       "region": "au",
@@ -115,7 +115,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌43.00 (INCL. GST)",
       "region": "au",
@@ -127,7 +127,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌51.00 (INCL. GST)",
       "region": "au",
@@ -139,7 +139,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌35.00 (INCL. GST)",
       "region": "au",
@@ -151,7 +151,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌35.00 (INCL. GST)",
       "region": "au",
@@ -161,9 +161,9 @@
     "au:N2881648002": {
       "first_seen": "2026-08-05T07:37:22+00:00",
       "flags": [
-        "OUT OF STOCK"
+        "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌52.00 (INCL. GST)",
       "region": "au",
@@ -175,7 +175,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌35.00 (INCL. GST)",
       "region": "au",
@@ -187,7 +187,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌35.00 (INCL. GST)",
       "region": "au",
@@ -199,7 +199,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌18.00 (INCL. GST)",
       "region": "au",
@@ -211,7 +211,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌18.00 (INCL. GST)",
       "region": "au",
@@ -223,7 +223,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌18.00 (INCL. GST)",
       "region": "au",
@@ -233,9 +233,9 @@
     "au:N2904549002": {
       "first_seen": "2026-08-05T07:37:22+00:00",
       "flags": [
-        "OUT OF STOCK"
+        "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-20T08:23:48+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": false,
       "price": "AU$‌148.00 (INCL. GST)",
       "region": "au",
@@ -259,7 +259,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-08-21T08:03:47+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": true,
       "price": "SG$‌71.00 (INCL. TAX)",
       "region": "sg",
@@ -283,7 +283,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-08-21T08:03:47+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": true,
       "price": "SG$‌118.00 (INCL. TAX)",
       "region": "sg",
@@ -295,7 +295,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-08-21T08:03:47+00:00",
+      "last_seen": "2026-08-21T08:24:15+00:00",
       "present": true,
       "price": "SG$‌159.00 (INCL. TAX)",
       "region": "sg",
@@ -303,5 +303,5 @@
       "url": "https://p-bandai.com/sg/item/AZ005710001"
     }
   },
-  "updated_at": "2026-08-21T08:03:47+00:00"
+  "updated_at": "2026-08-21T08:24:15+00:00"
 }
