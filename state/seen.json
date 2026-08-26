@@ -7,7 +7,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-08-26T15:25:29+00:00",
+      "last_seen": "2026-08-26T16:25:02+00:00",
       "present": true,
       "price": "AU$‌148.00 (INCL. GST)",
       "region": "au",
@@ -242,12 +242,840 @@
       "title": "ONE PIECE CARD GAME Chinese 3rd Anniversary Set",
       "url": "https://p-bandai.com/au/item/N2904549002"
     },
+    "sg:A2354350001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌75.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "Figuarts ZERO GUILD. TESORO",
+      "url": "https://p-bandai.com/sg/item/A2354350001"
+    },
+    "sg:A2354351001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌55.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "Figuarts ZERO CARINA",
+      "url": "https://p-bandai.com/sg/item/A2354351001"
+    },
+    "sg:A2354352001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌65.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "Figuarts ZERO MONKEY・D・LUFFY -ONE PIECE FILM GOLD Opening Ver.-",
+      "url": "https://p-bandai.com/sg/item/A2354352001"
+    },
+    "sg:A2367113001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌55.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "Figuarts ZERO SABO -ONE PIECE FILM GOLD Ver.-",
+      "url": "https://p-bandai.com/sg/item/A2367113001"
+    },
+    "sg:A2367114001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌55.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "Figuarts ZERO KOALA -ONE PIECE FILM GOLD Ver.-",
+      "url": "https://p-bandai.com/sg/item/A2367114001"
+    },
+    "sg:A2403866001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌60.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "FiguartsZERO Sanji -Whole cake island Ver.-",
+      "url": "https://p-bandai.com/sg/item/A2403866001"
+    },
+    "sg:A2437803001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌65.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "Figuarts Zero Corazon",
+      "url": "https://p-bandai.com/sg/item/A2437803001"
+    },
+    "sg:A2487233001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌12.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARDDASS PREMIUM EDITION STAMPEDE",
+      "url": "https://p-bandai.com/sg/item/A2487233001"
+    },
+    "sg:A2487233002": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌12.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARDDASS PREMIUM EDITION STAMPEDE [Mar 2020 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2487233002"
+    },
+    "sg:A2487233003": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌12.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARDDASS PREMIUM EDITION STAMPEDE [Apr 2020 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2487233003"
+    },
+    "sg:A2487234001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌12.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARDDASS PREMIUM EDITION STAMPEDE",
+      "url": "https://p-bandai.com/sg/item/A2487234001"
+    },
+    "sg:A2487234002": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌12.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARDDASS PREMIUM EDITION STAMPEDE [Mar 2020 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2487234002"
+    },
+    "sg:A2487234003": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌12.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARDDASS PREMIUM EDITION STAMPEDE [Apr 2020 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2487234003"
+    },
+    "sg:A2510391001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌17.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "One Piece Carddass Premium Edition Wanokunni Ver.",
+      "url": "https://p-bandai.com/sg/item/A2510391001"
+    },
+    "sg:A2510391002": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌17.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "One Piece Carddass Premium Edition Wanokunni Ver. [Jun 2020 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2510391002"
+    },
+    "sg:A2549093001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌150.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "One Piece Collaboration figure ～ Challenge from GReeeeN～",
+      "url": "https://p-bandai.com/sg/item/A2549093001"
+    },
+    "sg:A2549093002": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌150.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "One Piece Collaboration figure ～ Challenge from GReeeeN～ [Mar 2021 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2549093002"
+    },
+    "sg:A2549093003": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌150.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "One Piece Collaboration figure ～ Challenge from GReeeeN～ [Apr 2021 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2549093003"
+    },
+    "sg:A2549093004": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌150.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "One Piece Collaboration figure ～ Challenge from GReeeeN～ [Sep 2021 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2549093004"
+    },
+    "sg:A2649204001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌24.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME PREMIUM CARD COLLECTION 25th ANNIVERSARY EDITION",
+      "url": "https://p-bandai.com/sg/item/A2649204001"
+    },
+    "sg:A2649204002": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌24.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME PREMIUM CARD COLLECTION 25th ANNIVERSARY EDITION",
+      "url": "https://p-bandai.com/sg/item/A2649204002"
+    },
+    "sg:A2662400002": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌15.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME STORAGE X DON!! CARD SET [Mar 2023 Delivery]",
+      "url": "https://p-bandai.com/sg/item/A2662400002"
+    },
+    "sg:A2676672001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌74.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE MONKEY. D. LUFFY RUN! RUN! RUN!",
+      "url": "https://p-bandai.com/sg/item/A2676672001"
+    },
+    "sg:A2687095001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌74.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE RORONOA ZORO RUN! RUN! RUN!",
+      "url": "https://p-bandai.com/sg/item/A2687095001"
+    },
+    "sg:A2696325001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌27.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE Card game premium collection -Live Action Edition-",
+      "url": "https://p-bandai.com/sg/item/A2696325001"
+    },
+    "sg:A2700490001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌74.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE YAMATO RUN! RUN! RUN!",
+      "url": "https://p-bandai.com/sg/item/A2700490001"
+    },
+    "sg:A2704413001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌107.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME 1st ANNIVERSARY SET",
+      "url": "https://p-bandai.com/sg/item/A2704413001"
+    },
+    "sg:A2705358001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌74.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE UTA RUN! RUN! RUN!",
+      "url": "https://p-bandai.com/sg/item/A2705358001"
+    },
+    "sg:A2717894001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌74.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE TRAFALGAR LAW RUN! RUN! RUN!",
+      "url": "https://p-bandai.com/sg/item/A2717894001"
+    },
+    "sg:A2722564001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌79.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE SANJI RUN! RUN! RUN!",
+      "url": "https://p-bandai.com/sg/item/A2722564001"
+    },
+    "sg:A2724016001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌79.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE PORTGAS D. ACE RUN! RUN! RUN!",
+      "url": "https://p-bandai.com/sg/item/A2724016001"
+    },
+    "sg:A2729709001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌79.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE SABO RUN! RUN! RUN!",
+      "url": "https://p-bandai.com/sg/item/A2729709001"
+    },
+    "sg:A2739945001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌79.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE NICO・ROBIN RUN！RUN！RUN！",
+      "url": "https://p-bandai.com/sg/item/A2739945001"
+    },
+    "sg:A2746031001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌78.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE NAMI RUN!RUN!RUN!",
+      "url": "https://p-bandai.com/sg/item/A2746031001"
+    },
+    "sg:A2753100001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌75.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "G.E.M. SERIES ONE PIECE NEFELTARI VIVI RUN! RUN! RUN!",
+      "url": "https://p-bandai.com/sg/item/A2753100001"
+    },
+    "sg:A2755017001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌512.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "PROPLICA RORONOA ZORO THREE SWORD STYLE SET (WADO ICHIMONJI/SANDAI KITETSU/ENMA)",
+      "url": "https://p-bandai.com/sg/item/A2755017001"
+    },
+    "sg:A2762475001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌10.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME PREMIUM CARD COLLECTION ONE PIECE DAY'24 EDITION",
+      "url": "https://p-bandai.com/sg/item/A2762475001"
+    },
+    "sg:A2767812001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌167.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME 2nd ANNIVERSARY SET",
+      "url": "https://p-bandai.com/sg/item/A2767812001"
+    },
+    "sg:A2804088001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌78.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "YURACOLLE SERIES ONE PIECE GRAND LINE COLLECTION SPECIAL PACKAGING SET",
+      "url": "https://p-bandai.com/sg/item/A2804088001"
+    },
+    "sg:A2810997001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌108.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME CHINA 2ND ANNIVERSARY SET",
+      "url": "https://p-bandai.com/sg/item/A2810997001"
+    },
+    "sg:A2810998001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌106.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME ENGLISH 2ND ANNIVERSARY SET",
+      "url": "https://p-bandai.com/sg/item/A2810998001"
+    },
+    "sg:A2816540001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌81.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "YURACOLLE SERIES ONE PIECE GRAND LINE COLLECTION SET VOL2",
+      "url": "https://p-bandai.com/sg/item/A2816540001"
+    },
+    "sg:A2826188001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌10.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME PREMIUM CARD COLLECTION-ONE PIECE DAY'25-",
+      "url": "https://p-bandai.com/sg/item/A2826188001"
+    },
+    "sg:A2828949001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌191.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME 3rd ANNIVERSARY SET",
+      "url": "https://p-bandai.com/sg/item/A2828949001"
+    },
+    "sg:A2829130001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌81.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME ONE PIECE HEROINES SPECIAL SET",
+      "url": "https://p-bandai.com/sg/item/A2829130001"
+    },
+    "sg:A2834191001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌75.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "LUFFY’s ARTCANVAS 1/8 -1000LOGS Anniversary-",
+      "url": "https://p-bandai.com/sg/item/A2834191001"
+    },
+    "sg:A2836561001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌98.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE MONKEY.D.LUFFY LOS ANGELS LAKERS",
+      "url": "https://p-bandai.com/sg/item/A2836561001"
+    },
+    "sg:A2836562001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌98.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE MONKEY.D.LUFFY CHICAGO BULLS",
+      "url": "https://p-bandai.com/sg/item/A2836562001"
+    },
+    "sg:A2836563001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌98.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE MONKEY.D.LUFFY GOLDEN STATE WARRIORS",
+      "url": "https://p-bandai.com/sg/item/A2836563001"
+    },
+    "sg:A2836564001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌98.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE MONKEY.D.LUFFY BOSTON CELTICS",
+      "url": "https://p-bandai.com/sg/item/A2836564001"
+    },
+    "sg:A2836565001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌98.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE MONKEY.D.LUFFY NEW YORK KNICKS",
+      "url": "https://p-bandai.com/sg/item/A2836565001"
+    },
+    "sg:A2836566001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌98.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE MONKEY.D.LUFFY MEMPHIS GRIZZLIES",
+      "url": "https://p-bandai.com/sg/item/A2836566001"
+    },
+    "sg:A2837053001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌97.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "S.H.Figuarts RORONOA ZORO -THE KING OF HELL-",
+      "url": "https://p-bandai.com/sg/item/A2837053001"
+    },
+    "sg:A2848268001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌81.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "S.H.Figuarts ONE PIECE×NBA MONKEY.D.LUFFY -LOS ANGELES LAKERS ver.-",
+      "url": "https://p-bandai.com/sg/item/A2848268001"
+    },
+    "sg:A2848269001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌81.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "S.H.Figuarts ONE PIECE×NBA MONKEY.D.LUFFY -NEW YORK KNICKS ver.-",
+      "url": "https://p-bandai.com/sg/item/A2848269001"
+    },
+    "sg:A2848280001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌63.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "S.H.Figuarts ONE PIECE×NBA Basketball Hoop Set",
+      "url": "https://p-bandai.com/sg/item/A2848280001"
+    },
+    "sg:A2849679001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌81.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "S.H.Figuarts ONE PIECE×NBA MONKEY.D.LUFFY -GOLDEN STATE WARRIORS ver.-",
+      "url": "https://p-bandai.com/sg/item/A2849679001"
+    },
+    "sg:A2849680001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌81.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "S.H.Figuarts ONE PIECE×NBA MONKEY.D.LUFFY -CHICAGO BULLS ver.-",
+      "url": "https://p-bandai.com/sg/item/A2849680001"
+    },
+    "sg:A2849681001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌81.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "S.H.Figuarts ONE PIECE×NBA MONKEY.D.LUFFY -OKLAHOMA CITY THUNDER ver.-",
+      "url": "https://p-bandai.com/sg/item/A2849681001"
+    },
+    "sg:A2849682001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌81.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "S.H.Figuarts ONE PIECE×NBA MONKEY.D.LUFFY -BOSTON CELTICS ver.-",
+      "url": "https://p-bandai.com/sg/item/A2849682001"
+    },
+    "sg:A2854451001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌49.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA CHOPPER's PLUSH CHICAGO BULLS",
+      "url": "https://p-bandai.com/sg/item/A2854451001"
+    },
+    "sg:A2854452001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌49.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA CHOPPER's PLUSH BOSTON CELTICS",
+      "url": "https://p-bandai.com/sg/item/A2854452001"
+    },
+    "sg:A2854453001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌49.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA CHOPPER's PLUSH NEW YORK KNICKS",
+      "url": "https://p-bandai.com/sg/item/A2854453001"
+    },
+    "sg:A2854454001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌49.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA CHOPPER's PLUSH LOS ANGELES LAKERS",
+      "url": "https://p-bandai.com/sg/item/A2854454001"
+    },
+    "sg:A2854455001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌49.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA CHOPPER's PLUSH GOLDEN STATE WARRIORS",
+      "url": "https://p-bandai.com/sg/item/A2854455001"
+    },
+    "sg:A2854456001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌49.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA CHOPPER's PLUSH MEMPHIS GRIZZLIES",
+      "url": "https://p-bandai.com/sg/item/A2854456001"
+    },
+    "sg:A2863247001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌18.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME PREMIUM CARD COLLECTION -LIVE ACTION EDITION VOL.2 STRAW HAT CREW-",
+      "url": "https://p-bandai.com/sg/item/A2863247001"
+    },
+    "sg:A2863254001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌137.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME ENGLISH 3RD ANNIVERSARY SET",
+      "url": "https://p-bandai.com/sg/item/A2863254001"
+    },
+    "sg:A2863255001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌98.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME CHINA VERSION 3RD ANNIVERSARY SET",
+      "url": "https://p-bandai.com/sg/item/A2863255001"
+    },
     "sg:A2866726001": {
       "first_seen": "2026-08-05T07:37:22+00:00",
       "flags": [
-        "PRE-ORDER"
+        "OUT OF STOCK"
       ],
-      "last_seen": "2026-08-05T07:37:22+00:00",
+      "last_seen": "2026-08-26T16:25:02+00:00",
       "present": false,
       "price": "SG$‌163.00 (INCL. TAX)",
       "region": "sg",
@@ -257,9 +1085,9 @@
     "sg:A2866729001": {
       "first_seen": "2026-08-24T06:24:18+00:00",
       "flags": [
-        "PRE-ORDER"
+        "OUT OF STOCK"
       ],
-      "last_seen": "2026-08-24T10:24:32+00:00",
+      "last_seen": "2026-08-26T16:25:02+00:00",
       "present": false,
       "price": "SG$‌10.00 (INCL. TAX)",
       "region": "sg",
@@ -269,34 +1097,286 @@
     "sg:A2870005001": {
       "first_seen": "2026-08-20T09:23:49+00:00",
       "flags": [
-        "PRE-ORDER"
+        "OUT OF STOCK"
       ],
-      "last_seen": "2026-08-26T10:54:16+00:00",
+      "last_seen": "2026-08-26T16:25:02+00:00",
       "present": false,
       "price": "SG$‌71.00 (INCL. TAX)",
       "region": "sg",
       "title": "LUFFY’s ARTCANVAS 1/8 -20th Anniversary-",
       "url": "https://p-bandai.com/sg/item/A2870005001"
     },
+    "sg:A2881601001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌18.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME PREMIUM CARD COLLECTION -LIVE ACTION EDITION VOL.2 BAROQUE WORKS-",
+      "url": "https://p-bandai.com/sg/item/A2881601001"
+    },
+    "sg:A2884072001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌87.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "YURACOLLE SERIES ONE PIECE GRAND LINE COLLECTION SET VOL.3",
+      "url": "https://p-bandai.com/sg/item/A2884072001"
+    },
     "sg:A2894586001": {
       "first_seen": "2026-08-05T07:37:22+00:00",
       "flags": [
-        "PRE-ORDER"
+        "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-19T14:27:45+00:00",
+      "last_seen": "2026-08-26T16:25:02+00:00",
       "present": false,
       "price": "SG$‌173.00 (INCL. TAX)",
       "region": "sg",
       "title": "PORTRAIT.OF.PIRATES ONE PIECE “S.O.C” SANJI VER.R",
       "url": "https://p-bandai.com/sg/item/A2894586001"
     },
+    "sg:A2903430001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌10.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME PREMIUM CARD COLLECTION 29TH ANNIVERSARY EDITION",
+      "url": "https://p-bandai.com/sg/item/A2903430001"
+    },
+    "sg:A9061144001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌161.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "LUFFY’s ONE PIECE×NBA -Uniform Icon Edition-(BOX)",
+      "url": "https://p-bandai.com/sg/item/A9061144001"
+    },
+    "sg:AZ005088001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌60.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "THE DEVIL FRUIT HUMAN-HUMAN FRUIT MYTHICAL ZOAN MODEL NIKA W/O GUM",
+      "url": "https://p-bandai.com/sg/item/AZ005088001"
+    },
+    "sg:AZ005565001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌159.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE ENEL OKLAHOMA CITY THUNDER",
+      "url": "https://p-bandai.com/sg/item/AZ005565001"
+    },
+    "sg:AZ005566001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌159.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE MONKEY.D.LUFFY GEAR5 LOS ANGELES LAKERS",
+      "url": "https://p-bandai.com/sg/item/AZ005566001"
+    },
+    "sg:AZ005606001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌139.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE SHANKS CHICAGO BULLS",
+      "url": "https://p-bandai.com/sg/item/AZ005606001"
+    },
+    "sg:AZ005607001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌118.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE RORONOA ZORO BOSTON CELTICS",
+      "url": "https://p-bandai.com/sg/item/AZ005607001"
+    },
+    "sg:AZ005634001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌118.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE SANJI INDIANA PACERS",
+      "url": "https://p-bandai.com/sg/item/AZ005634001"
+    },
+    "sg:AZ005635001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌118.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA MASTER STARS PIECE THE NAMI DENVER NUGGETS",
+      "url": "https://p-bandai.com/sg/item/AZ005635001"
+    },
+    "sg:AZ005655001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌21.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA WORLD COLLECTABLE FIGURE MONKEY.D.LUFFY GEAR5",
+      "url": "https://p-bandai.com/sg/item/AZ005655001"
+    },
+    "sg:AZ005656001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌21.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA WORLD COLLECTABLE FIGURE SHANKS",
+      "url": "https://p-bandai.com/sg/item/AZ005656001"
+    },
+    "sg:AZ005657001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌21.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA WORLD COLLECTABLE FIGURE TRAFALGAR.LAW",
+      "url": "https://p-bandai.com/sg/item/AZ005657001"
+    },
+    "sg:AZ005658001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌21.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA WORLD COLLECTABLE FIGURE RORONOA ZORO",
+      "url": "https://p-bandai.com/sg/item/AZ005658001"
+    },
+    "sg:AZ005659001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌21.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA WORLD COLLECTABLE FIGURE PORTGAS.D. ACE",
+      "url": "https://p-bandai.com/sg/item/AZ005659001"
+    },
+    "sg:AZ005660001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌21.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA WORLD COLLECTABLE FIGURE SABO",
+      "url": "https://p-bandai.com/sg/item/AZ005660001"
+    },
+    "sg:AZ005661001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌21.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA WORLD COLLECTABLE FIGURE YAMATO",
+      "url": "https://p-bandai.com/sg/item/AZ005661001"
+    },
+    "sg:AZ005662001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌21.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA WORLD COLLECTABLE FIGURE SANJI",
+      "url": "https://p-bandai.com/sg/item/AZ005662001"
+    },
+    "sg:AZ005663001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌21.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA WORLD COLLECTABLE FIGURE NAMI",
+      "url": "https://p-bandai.com/sg/item/AZ005663001"
+    },
+    "sg:AZ005664001": {
+      "first_seen": "2026-08-26T16:25:02+00:00",
+      "flags": [
+        "PRE-ORDER CLOSED"
+      ],
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
+      "price": "SG$‌21.00 (INCL. TAX)",
+      "region": "sg",
+      "title": "ONE PIECE × NBA WORLD COLLECTABLE FIGURE ENEL",
+      "url": "https://p-bandai.com/sg/item/AZ005664001"
+    },
     "sg:AZ005709001": {
       "first_seen": "2026-08-05T07:37:22+00:00",
       "flags": [
-        "PRE-ORDER"
+        "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-26T15:25:29+00:00",
-      "present": true,
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
       "price": "SG$‌118.00 (INCL. TAX)",
       "region": "sg",
       "title": "ONE PIECE × NBA MASTER STARS PIECE THE TRAFALGAR.LAW GOLDEN STATE WARRIORS",
@@ -305,15 +1385,15 @@
     "sg:AZ005710001": {
       "first_seen": "2026-08-05T07:37:22+00:00",
       "flags": [
-        "PRE-ORDER"
+        "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-08-26T15:25:29+00:00",
-      "present": true,
+      "last_seen": "2026-08-26T16:25:02+00:00",
+      "present": false,
       "price": "SG$‌159.00 (INCL. TAX)",
       "region": "sg",
       "title": "ONE PIECE × NBA MASTER STARS PIECE THE YAMATO MILWAUKEE BUCKS",
       "url": "https://p-bandai.com/sg/item/AZ005710001"
     }
   },
-  "updated_at": "2026-08-26T15:25:29+00:00"
+  "updated_at": "2026-08-26T16:25:02+00:00"
 }
