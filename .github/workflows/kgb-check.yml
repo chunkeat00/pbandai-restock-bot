@@ -59,7 +59,7 @@ jobs:
           for i in 1 2 3; do
             if git push; then exit 0; fi
             echo "push rejected, rebasing (attempt $i)"
-            git pull --rebase --autostash || true
+            git pull --rebase --autostash origin main || true
             sleep $((i * 3))
           done
           echo "push failed after 3 attempts" >&2
