@@ -1,0 +1,66 @@
+name: KGB Beyblade restock check
+
+on:
+  schedule:
+    # 备胎，不是主力。主触发是 Cloudflare Worker，每小时 :38 打
+    # workflow_dispatch API 过来（见 kgb-restock-bot/README「外部定时触发」）。
+    #
+    # 设在 :08 是为了跟另外三个事件错开——pbandai 的 :23（Cloudflare）和
+    # :53（备胎）、本 bot 的 :38（Cloudflare）——四个均匀分布在一小时里，
+    # 既不互相排队，也不会同时抢着往 main 推 state。
+    - cron: "08 * * * *"
+  workflow_dispatch:        # Cloudflare Worker 和手动运行都走这个
+
+concurrency:
+  group: kgb-check
+  cancel-in-progress: false
+
+permissions:
+  contents: write           # 需要把 state/seen.json commit 回去
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # 没有 pip install，也没有 Playwright/chromium。
+      # 这个站点整页服务端渲染，而且卖光的商品会从分类页消失——所以"在不在
+      # 列表上"就是库存信号，一个 HTTP GET 加一次正则就够了。
+      # 一次运行 <1 秒，隔壁那个要 ~50 秒。
+
+      - name: Run check
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          KGB_WATCH_URLS: ${{ vars.KGB_WATCH_URLS }}       # 不设就用代码里的默认分类页
+          HEALTHCHECK_URL: ${{ secrets.KGB_HEALTHCHECK_URL }}   # 不设就自动关闭
+        run: python kgb-restock-bot/check.py
+
+      - name: Commit updated state
+        if: success()
+        run: |
+          git config user.name  "kgb-bot"
+          git config user.email "actions@github.com"
+          git add kgb-restock-bot/state/seen.json
+          if git diff --staged --quiet; then
+            echo "no state change"
+            exit 0
+          fi
+          git commit -m "state: update kgb seen items [skip ci]"
+          # 这个 repo 现在有两个 bot 在往 main 推 state。抢输了是正常现象，
+          # 不是错误——rebase 到对方的提交上面再试一次就好。
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected, rebasing (attempt $i)"
+            git pull --rebase --autostash || true
+            sleep $((i * 3))
+          done
+          echo "push failed after 3 attempts" >&2
+          exit 1

@@ -63,7 +63,17 @@ jobs:
           git add state/seen.json
           if git diff --staged --quiet; then
             echo "no state change"
-          else
-            git commit -m "state: update seen items [skip ci]"
-            git push
+            exit 0
           fi
+          git commit -m "state: update seen items [skip ci]"
+          # 这个 repo 现在有两个 bot 在往 main 推 state（另一个是
+          # kgb-check.yml）。抢输了是正常现象，不是错误——rebase 到对方的
+          # 提交上面再试一次就好。
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected, rebasing (attempt $i)"
+            git pull --rebase --autostash || true
+            sleep $((i * 3))
+          done
+          echo "push failed after 3 attempts" >&2
+          exit 1
