@@ -5,10 +5,10 @@
     "au:A2870005001": {
       "first_seen": "2026-08-20T09:23:49+00:00",
       "flags": [
-        "OUT OF STOCK"
+        "PRE-ORDER"
       ],
-      "last_seen": "2026-09-09T05:24:34+00:00",
-      "present": false,
+      "last_seen": "2026-09-09T06:24:27+00:00",
+      "present": true,
       "price": "AU$‌148.00 (INCL. GST)",
       "region": "au",
       "title": "LUFFY’s ARTCANVAS 1/8 -20th Anniversary-",
@@ -1135,7 +1135,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-09-09T05:24:34+00:00",
+      "last_seen": "2026-09-09T06:24:27+00:00",
       "present": true,
       "price": "SG$‌172.00 (INCL. TAX)",
       "region": "sg",
@@ -1159,7 +1159,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-09-09T05:24:34+00:00",
+      "last_seen": "2026-09-09T06:24:27+00:00",
       "present": true,
       "price": "SG$‌192.00 (INCL. TAX)",
       "region": "sg",
@@ -1183,7 +1183,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-09-09T05:24:34+00:00",
+      "last_seen": "2026-09-09T06:24:27+00:00",
       "present": true,
       "price": "SG$‌172.00 (INCL. TAX)",
       "region": "sg",
@@ -1435,7 +1435,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-09-09T05:24:34+00:00",
+      "last_seen": "2026-09-09T06:24:27+00:00",
       "present": true,
       "price": "SG$‌118.00 (INCL. TAX)",
       "region": "sg",
@@ -1447,7 +1447,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-09-09T05:24:34+00:00",
+      "last_seen": "2026-09-09T06:24:27+00:00",
       "present": true,
       "price": "SG$‌118.00 (INCL. TAX)",
       "region": "sg",
@@ -1455,5 +1455,5 @@
       "url": "https://p-bandai.com/sg/item/AZ005737001"
     }
   },
-  "updated_at": "2026-09-09T05:24:34+00:00"
+  "updated_at": "2026-09-09T06:24:28+00:00"
 }
