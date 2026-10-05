@@ -2,17 +2,25 @@
 """
 P-Bandai restock / new-arrival alert bot.
 
-Renders the P-Bandai listing page(s) with a headless browser, extracts every
-product card from the results grid, keeps only the orderable ones, diffs
+Reads the P-Bandai listing page(s), keeps only the orderable products, diffs
 against a saved state file, and pushes a Telegram message when something new
 shows up (or an item comes back in stock).
 
+No browser. P-Bandai's listing HTML already carries the full search result as
+JSON, in a `PRELOAD_DATA = {...}` script the server writes before any
+JavaScript runs: every product's code, name, price and status badges, plus the
+`totalCount` for the whole query. Reading that instead of rendering the page
+means we can page to the very end and then *check* we got all of it — the old
+browser scraper stopped after a fixed number of pages and could not tell when
+the catalogue had outgrown them (SG did, at 103 items, in 2026-08).
+
 Why we filter in the scraper instead of trusting the URL:
-  P-Bandai's `_f_productStatuses` query param is unreliable. Verified 2026-08:
-  on the AU site `_f_productStatuses=Waiting,On` returns 19 results that are
-  ALL "OUT OF STOCK" / "PRE-ORDER CLOSED", while `_f_productStatuses=On`
-  correctly returns 0. So the availability decision is made here, from the
-  badge printed on each card.
+  `_f_productStatuses` misbehaves. Verified 2026-10: single values are fine
+  (`=On` on AU correctly returns 0), but the combined `Waiting,On` is silently
+  dropped whenever *neither* status has a match — AU, where everything has
+  ended, gets its whole list back. SG only looks fine because it happens to
+  have something on sale. So availability is decided here, from each
+  product's own status, and the URL stays unfiltered.
 
 Env vars:
   TELEGRAM_BOT_TOKEN   (required)
@@ -22,7 +30,10 @@ Env vars:
                        No default: an unset value aborts the run instead of
                        quietly falling back to URLs baked into this file.
   STATE_FILE           (optional) default: state/seen.json
-  MAX_PAGES            (optional) default: 5
+  MAX_PAGES            (optional) default: 50. A runaway guard, not a window:
+                       a list longer than this fails loudly instead of being
+                       silently cut short.
+  REQUEST_DELAY        (optional) seconds between page fetches, default 0.5
   ALERT_ON_ALL         (optional) "1" = also alert on unavailable items
   DRY_RUN              (optional) "1" = print instead of sending
 """
@@ -41,7 +52,6 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-from playwright.sync_api import sync_playwright
 
 # --------------------------------------------------------------------------- #
 # Config
@@ -56,7 +66,8 @@ CHAT_IDS = [
     if c.strip() and not c.strip().startswith("#")
 ]
 STATE_FILE = Path(os.environ.get("STATE_FILE", "state/seen.json"))
-MAX_PAGES = int(os.environ.get("MAX_PAGES", "5"))
+MAX_PAGES = int(os.environ.get("MAX_PAGES", "50"))
+REQUEST_DELAY = float(os.environ.get("REQUEST_DELAY", "0.5"))
 ALERT_ON_ALL = os.environ.get("ALERT_ON_ALL", "") == "1"
 DRY_RUN = os.environ.get("DRY_RUN", "") == "1"
 
@@ -86,8 +97,9 @@ One listing URL per line, e.g.:
   https://p-bandai.com/sg/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival
   https://p-bandai.com/au/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival
 
-Leave out _f_productStatuses — that filter is unreliable on P-Bandai and this
-script decides availability from each card's badge instead.
+Leave out _f_productStatuses — `Waiting,On` is silently ignored whenever
+nothing matches it, and this script decides availability from each product's
+own status anyway.
 
 Locally:  export WATCH_URLS='<url1>
 <url2>'
@@ -122,6 +134,12 @@ UNAVAILABLE_MARKERS = (
 
 
 def is_available(item: dict) -> bool:
+    # "End" is P-Bandai's own terminal sale status. Every ended product seen so
+    # far also carries a CLOSED / OUT OF STOCK badge, so this changes nothing
+    # today; it is here for the day one ships without a badge, which the
+    # deny-list below would otherwise wave through as orderable.
+    if item.get("sale_status") == "End":
+        return False
     blob = " ".join(item.get("flags") or []).upper()
     return not any(mark in blob for mark in UNAVAILABLE_MARKERS)
 
@@ -133,105 +151,89 @@ def region_of(url: str) -> str:
 
 
 # --------------------------------------------------------------------------- #
-# Page extraction
+# Fetching and parsing
 # --------------------------------------------------------------------------- #
 
-# Runs inside the page.
-#
-# Scoped to `.o-search-product`, the real results grid. The page ALSO renders a
-# "RECOMMENDATIONS" carousel (`.c-search-recommend-carousel__slide-list`) full
-# of unrelated products -- scanning the whole document picks those up and
-# produces junk alerts every run.
-#
-# Returns {ok, items}. `ok` reports that the grid rendered at all, so a
-# legitimately empty filter (0 available items) can be told apart from a
-# broken scrape.
-EXTRACT_JS = r"""
-() => {
-  const root = document.querySelector('.o-search-product');
-  if (!root) return { ok: false, items: [] };
+PRELOAD = re.compile(r"PRELOAD_DATA\s*=\s*")
 
-  const ITEM_SEL = 'a[href*="/item/"]';
-  const idOf = href => {
-    const m = href.match(/\/item\/([A-Za-z0-9][A-Za-z0-9_-]*)/);
-    return m ? m[1] : null;
-  };
+CURRENCY_SYMBOL = {"SGD": "SG$", "AUD": "AU$", "HKD": "HK$", "TWD": "NT$",
+                   "MYR": "RM", "USD": "US$"}
 
-  let cards = Array.from(root.querySelectorAll('.c-product'));
 
-  // Fallback if Bandai renames the card class: smallest single-item ancestor.
-  if (!cards.length) {
-    const seen = new Set();
-    for (const a of root.querySelectorAll(ITEM_SEL)) {
-      let card = a;
-      for (let i = 0; i < 5; i++) {
-        const p = card.parentElement;
-        if (!p || p === root) break;
-        const ids = new Set();
-        for (const l of p.querySelectorAll(ITEM_SEL)) {
-          const id = idOf(l.href);
-          if (id) ids.add(id);
-        }
-        if (ids.size > 1) break;
-        card = p;
-      }
-      if (!seen.has(card)) { seen.add(card); cards.push(card); }
+def fetch(url: str, attempts: int = 3) -> str | None:
+    """GET a page, or None once retries are spent."""
+    for i in range(attempts):
+        try:
+            req = urllib.request.Request(url, headers={
+                "User-Agent": UA,
+                "Accept": "text/html,application/xhtml+xml",
+                "Accept-Language": "en-SG,en;q=0.9",
+            })
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return r.read().decode("utf-8", "replace")
+        except Exception as e:
+            print(f"     fetch attempt {i + 1} failed: {e}", file=sys.stderr)
+            if i < attempts - 1:
+                time.sleep(2 * (i + 1))
+    return None
+
+
+def parse_results(page: str) -> tuple[list[dict], int] | None:
+    """(products, totalCount) from the page's PRELOAD_DATA, or None if the page
+    does not carry one — which is how a block page, a maintenance page or a
+    layout change shows up, and must never be read as an empty list."""
+    m = PRELOAD.search(page)
+    if not m:
+        return None
+    try:
+        data, _ = json.JSONDecoder().raw_decode(page, m.end())
+        pr = data["searchResult"]["productResults"]
+    except (ValueError, KeyError, TypeError):
+        return None
+    products, total = pr.get("products"), pr.get("totalCount")
+    if not isinstance(products, list) or not isinstance(total, int):
+        return None
+    return products, total
+
+
+def to_item(p: dict, region: str) -> dict | None:
+    """One PRELOAD_DATA product -> the item shape the rest of this file uses.
+
+    `productCode` is the id in the product URL, so keys match what the old
+    browser scraper stored and an upgrade does not re-announce everything.
+    Flags come from the English badge labels for the same reason: they are the
+    exact strings the cards print (checked against 124 stored records, 0 diffs).
+    """
+    code = p.get("productCode")
+    if not code:
+        return None
+
+    names = p.get("productName") or {}
+    title = names.get("en") or next((v for v in names.values() if v), "") or code
+
+    flags = [((f.get("labelName") or {}).get("en") or "").strip()
+             for f in (p.get("productFlags") or [])]
+    flags = [f for f in flags if f]
+    if not flags:
+        # Raw codes ("PRE_ORDER_CLOSED") still trip the deny-list on CLOSED etc.
+        flags = [c.replace("_", " ") for c in (p.get("flags") or []) if c]
+
+    price = ""
+    lp = p.get("fixedListPrice") or p.get("baseListPrice")
+    if isinstance(lp, dict) and isinstance(lp.get("amount"), (int, float)):
+        cur = lp.get("currency") or ""
+        price = f"{CURRENCY_SYMBOL.get(cur, cur + ' ')}{lp['amount']:,.2f}"
+
+    return {
+        "id": code,
+        "key": f"{region}:{code}",
+        "region": region,
+        "title": title.strip()[:200],
+        "url": f"https://p-bandai.com/{region}/item/{code}",
+        "price": price,
+        "flags": flags,
+        "sale_status": p.get("saleStatus"),
     }
-  }
-
-  const txt = el => ((el && el.innerText) || '')
-    .replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
-
-  const results = {};
-
-  for (const card of cards) {
-    const a = card.matches && card.matches(ITEM_SEL)
-      ? card : card.querySelector(ITEM_SEL);
-    if (!a) continue;
-    const id = idOf(a.href);
-    if (!id) continue;
-
-    const img = card.querySelector('img');
-
-    let title = txt(card.querySelector('.c-product__title'));
-    if (!title) title = txt(a).split('\n')[0];
-    if (!title && img && img.alt) title = img.alt.trim();
-
-    let price = txt(card.querySelector('.c-product__price'));
-    if (!price) {
-      const pm = txt(card).match(/(?:S\$|A\$|SGD|AUD|\$)\s?[\d,]+(?:\.\d{2})?/);
-      price = pm ? pm[0].replace(/\s+/g, '') : '';
-    }
-
-    // Status badges, e.g. PRE-ORDER / OUT OF STOCK / PRE-ORDER CLOSED.
-    let flags = Array.from(card.querySelectorAll('.p-flag__item'))
-      .map(f => txt(f)).filter(Boolean);
-    if (!flags.length) {
-      const rest = txt(card).replace(title, '').trim();
-      if (rest && rest.length < 40) flags = [rest];
-    }
-
-    const prev = results[id];
-    const score = title.length + price.length + flags.join('').length;
-    if (!prev || score > prev._score) {
-      results[id] = {
-        id,
-        title: title.slice(0, 200),
-        url: a.href.split('?')[0],
-        image: img ? (img.currentSrc || img.src || '') : '',
-        price,
-        flags,
-        _score: score,
-      };
-    }
-  }
-
-  return {
-    ok: true,
-    items: Object.values(results).map(o => { delete o._score; return o; }),
-  };
-}
-"""
 
 
 def set_offset(url: str, offset: int) -> str:
@@ -253,76 +255,69 @@ def page_limit(url: str) -> int:
         return 20
 
 
-def dismiss_overlays(page) -> None:
-    """Best-effort click on cookie / region / age-gate banners."""
-    for label in ("Accept", "I Agree", "Agree", "OK", "Close", "Reject All"):
-        try:
-            btn = page.get_by_role(
-                "button", name=re.compile(rf"^\s*{label}\s*$", re.I)
-            )
-            if btn.count() > 0 and btn.first.is_visible():
-                btn.first.click(timeout=1500)
-                page.wait_for_timeout(400)
-        except Exception:
-            pass
+def scrape_url(url: str) -> tuple[list[dict], bool]:
+    """Read one listing URL to the end. Returns (items, ok).
 
-
-def scrape_url(page, url: str) -> tuple[list[dict], bool]:
-    """Scrape one listing URL across offset pages. Returns (items, ok)."""
+    ok means *complete*, not merely "something came back": the number of
+    distinct products read must equal the totalCount the server reported. A
+    short read is the dangerous case — whatever it missed would be marked as
+    gone, and announced as a restock the next time it reappeared.
+    """
     limit = page_limit(url)
     region = region_of(url)
     found: dict[str, dict] = {}
-    any_ok = False
+    total = None
 
     for page_idx in range(MAX_PAGES):
-        target = set_offset(url, page_idx * limit)
-        print(f"  -> [{region}] offset={page_idx * limit}", flush=True)
+        offset = page_idx * limit
+        if total is not None and offset >= total:
+            break
+        if page_idx:
+            time.sleep(REQUEST_DELAY)
 
-        page.goto(target, wait_until="domcontentloaded", timeout=60_000)
-        try:
-            page.wait_for_load_state("networkidle", timeout=25_000)
-        except Exception:
-            pass
+        page = fetch(set_offset(url, offset))
+        parsed = parse_results(page) if page is not None else None
+        if parsed is None:
+            print(f"     offset={offset}: no PRELOAD_DATA — treating as failure",
+                  file=sys.stderr)
+            return list(found.values()), False
 
-        if page_idx == 0:
-            dismiss_overlays(page)
+        products, page_total = parsed
+        if total is None:
+            total = page_total
+        elif page_total != total:
+            # The catalogue changed under us; offsets have shifted, so this
+            # read is not trustworthy. Next run will get a clean one.
+            print(f"     totalCount moved {total} -> {page_total} mid-read",
+                  file=sys.stderr)
+            return list(found.values()), False
 
-        # Wait for the results grid, then nudge lazy images/cards.
-        try:
-            page.wait_for_selector(".o-search-product", timeout=20_000)
-        except Exception:
-            print("     results grid never appeared", file=sys.stderr)
-        for _ in range(3):
-            page.mouse.wheel(0, 4000)
-            page.wait_for_timeout(600)
-        page.wait_for_timeout(1000)
+        page_items = [it for p in products if (it := to_item(p, region))]
+        for it in page_items:
+            found.setdefault(it["key"], it)
 
-        try:
-            res = page.evaluate(EXTRACT_JS)
-        except Exception as e:
-            print(f"     extraction failed: {e}", file=sys.stderr)
-            res = {"ok": False, "items": []}
+        avail = sum(1 for it in page_items if is_available(it))
+        print(f"  -> [{region}] offset={offset} items={len(products)} "
+              f"available={avail} total={total}", flush=True)
 
-        ok = bool(res.get("ok"))
-        items = res.get("items") or []
-        any_ok = any_ok or ok
-
-        fresh = 0
-        for it in items:
-            it["region"] = region
-            it["key"] = f"{region}:{it['id']}"
-            if it["key"] not in found:
-                found[it["key"]] = it
-                fresh += 1
-
-        avail = sum(1 for it in items if is_available(it))
-        print(f"     grid_ok={ok} items={len(items)} available={avail} "
-              f"new_on_page={fresh}", flush=True)
-
-        if not ok or fresh == 0 or len(items) < limit:
+        if not products:
             break
 
-    return list(found.values()), any_ok
+    if not total:
+        # A series page always lists *something* — P-Bandai keeps ended
+        # products on it. Zero is a broken response, not an empty shelf.
+        print(f"     [{region}] totalCount=0 — treating as failure",
+              file=sys.stderr)
+        return [], False
+
+    if len(found) != total:
+        hint = (f" (MAX_PAGES={MAX_PAGES} × limit={limit} is too small)"
+                if total > MAX_PAGES * limit else "")
+        print(f"     [{region}] read {len(found)} of {total}{hint}",
+              file=sys.stderr)
+        return list(found.values()), False
+
+    return list(found.values()), True
 
 
 def scrape_all() -> tuple[list[dict], dict[str, bool]]:
@@ -336,28 +331,17 @@ def scrape_all() -> tuple[list[dict], dict[str, bool]]:
     """
     all_items: dict[str, dict] = {}
     ok_by_region: dict[str, bool] = {}
-    with sync_playwright() as p:
-        browser = p.chromium.launch(
-            args=["--disable-blink-features=AutomationControlled"]
-        )
-        ctx = browser.new_context(
-            user_agent=UA,
-            viewport={"width": 1440, "height": 1000},
-            locale="en-SG",
-        )
-        page = ctx.new_page()
-        for url in WATCH_URLS:
-            region = region_of(url)
-            print(f"[scrape] {url}", flush=True)
-            try:
-                items, ok = scrape_url(page, url)
-                for it in items:
-                    all_items.setdefault(it["key"], it)
-            except Exception as e:
-                ok = False
-                print(f"  !! failed: {e}", file=sys.stderr)
-            ok_by_region[region] = ok_by_region.get(region, True) and ok
-        browser.close()
+    for url in WATCH_URLS:
+        region = region_of(url)
+        print(f"[scrape] {url}", flush=True)
+        try:
+            items, ok = scrape_url(url)
+            for it in items:
+                all_items.setdefault(it["key"], it)
+        except Exception as e:
+            ok = False
+            print(f"  !! failed: {e}", file=sys.stderr)
+        ok_by_region[region] = ok_by_region.get(region, True) and ok
     return list(all_items.values()), ok_by_region
 
 
@@ -367,12 +351,14 @@ def scrape_all() -> tuple[list[dict], dict[str, bool]]:
 
 def load_state() -> dict:
     if not STATE_FILE.exists():
-        return {"items": {}, "initialized": False, "updated_at": None}
+        return {"items": {}, "initialized": False, "updated_at": None,
+                "schema": 3}
     try:
         state = json.loads(STATE_FILE.read_text(encoding="utf-8"))
     except Exception:
         print("state file unreadable, starting fresh", file=sys.stderr)
-        return {"items": {}, "initialized": False, "updated_at": None}
+        return {"items": {}, "initialized": False, "updated_at": None,
+                "schema": 3}
 
     # Migration: v1 keyed items by bare id (SG-only). v2 keys them by
     # "<region>:<id>" so the same id on two storefronts stays distinct.
@@ -384,6 +370,20 @@ def load_state() -> dict:
         state["items"] = migrated
         print(f"migrated {len(migrated)} state keys to region-scoped form",
               flush=True)
+
+    # Migration: v2 recorded every product it scraped, orderable or not. Once
+    # P-Bandai SG started listing its whole back catalogue of closed
+    # pre-orders (2026-08-26) that was 120-odd records nobody would ever be
+    # alerted on. v3 only tracks products that have been orderable, so drop
+    # everything that is not orderable now. Cost: if one of those ever
+    # reopens it is announced as new rather than as a restock.
+    if state.get("schema", 2) < 3:
+        before = len(state.get("items", {}))
+        state["items"] = {k: v for k, v in state.get("items", {}).items()
+                          if v.get("present")}
+        state["schema"] = 3
+        print(f"schema v3: dropped {before - len(state['items'])} records that "
+              f"are not orderable, kept {len(state['items'])}", flush=True)
     return state
 
 
@@ -547,12 +547,19 @@ def main() -> int:
     new_items, back_items = [], []
     alertable_keys = {it["key"] for it in available}
 
-    # Record every scraped item, available or not. `present` tracks
-    # alertability, so sold-out -> back-in-stock reads as a restock.
+    # Track what has been orderable at some point. Something that has never
+    # been orderable is not recorded at all — P-Bandai lists its entire back
+    # catalogue of closed pre-orders, and storing those is what grew the state
+    # file past 1500 lines. Once recorded, a product stays, with `present`
+    # following its orderability, so sold-out -> back-in-stock reads as a
+    # restock.
     for it in items:
         key = it["key"]
         prev = known.get(key)
         now_alertable = key in alertable_keys
+
+        if prev is None and not now_alertable:
+            continue
 
         if now_alertable:
             if prev is None:
@@ -582,7 +589,7 @@ def main() -> int:
     if not state.get("initialized"):
         tg_send(
             "✅ <b>P-Bandai restock bot 已启动</b>\n"
-            f"监控中：{len(WATCH_URLS)} 个列表，共 {len(known)} 件商品，"
+            f"监控中：{len(WATCH_URLS)} 个列表，共 {len(items)} 件商品，"
             f"其中现在可下单 {len(available)} 件。\n"
             + (f"⚠️ 读不到：{', '.join(r.upper() for r in bad)}\n" if bad else "")
             + "之后有上新或补货才会再通知你。"

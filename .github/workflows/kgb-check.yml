@@ -33,7 +33,7 @@ jobs:
       # 没有 pip install，也没有 Playwright/chromium。
       # 这个站点整页服务端渲染，而且卖光的商品会从分类页消失——所以"在不在
       # 列表上"就是库存信号，一个 HTTP GET 加一次正则就够了。
-      # 一次运行 <1 秒，隔壁那个要 ~50 秒。
+      # 一次运行 <1 秒。
 
       - name: Run check
         env:

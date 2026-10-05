@@ -14,6 +14,13 @@ on:
     # 会让后到的那次排队等前一次跑完，不会两个一起 git push 打架。
     - cron: "53 * * * *"
   workflow_dispatch:        # Cloudflare Worker 和 Actions 页面手动运行都走这个
+    inputs:
+      dry_run:
+        # 手动排查用：Actions 页面 Run workflow 时勾上，只打印不发 Telegram，
+        # 也不提交 state。Cloudflare 那边不带这个参数，默认就是 false。
+        description: "Dry run：只打印，不发 Telegram、不提交 state"
+        type: boolean
+        default: false
 
 concurrency:
   group: pbandai-check
@@ -25,7 +32,7 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
 
     steps:
       # Node 24 runtimes. v4/v5 of these actions targeted Node 20, which is
@@ -36,16 +43,9 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Cache Playwright browsers
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ runner.os }}-v1
-
-      - name: Install deps
-        run: |
-          pip install -r requirements.txt
-          python -m playwright install --with-deps chromium
+      # 没有 pip install，也没有 Playwright/chromium。P-Bandai 的列表页 HTML 里
+      # 直接嵌着完整的搜索结果 JSON（PRELOAD_DATA），标准库 urllib 就够了。
+      # 一次运行从 ~75 秒降到 ~5 秒。
 
       - name: Run check
         env:
@@ -53,10 +53,11 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           WATCH_URLS: ${{ vars.WATCH_URLS }}
           HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}   # 没设就自动关闭
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
         run: python check.py
 
       - name: Commit updated state
-        if: success()
+        if: success() && !inputs.dry_run
         run: |
           git config user.name  "pbandai-bot"
           git config user.email "actions@github.com"

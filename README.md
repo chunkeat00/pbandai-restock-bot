@@ -8,51 +8,64 @@ OUT OF STOCK 和 PRE-ORDER CLOSED 会自动过滤掉。
 
 ---
 
-## ⚠️ 升级说明（v2）
+## v3（2026-10）：不用浏览器了
 
-如果你已经在跑 v1，这次要改两个地方：
+**你不用做任何事**，`WATCH_URLS` 不用改，state 会在第一次运行时自动迁移。
+下面是改了什么、为什么。
 
-### 1. 换掉 `WATCH_URLS`（重要）
+### 为什么改
 
-**P-Bandai 的 `_f_productStatuses` 参数不可靠。** 实测 2026-08：
+2026-08-26 起 P-Bandai SG 开始在列表里显示**整个历史目录**，包括所有已截单的预购。
+SG 的 One Piece 列表从十几件涨到 103 件，其中能买的只有 2 件。
 
-| URL 参数 | AU 站实际返回 |
-|---|---|
-| `_f_productStatuses=Waiting,On` | 19 件，**全部 OUT OF STOCK / PRE-ORDER CLOSED** ❌ |
-| `_f_productStatuses=On` | 0 件（正确，facet 显示 Available = 0）✅ |
+旧版用浏览器渲染页面，最多翻 5 页（100 件）。列表超过 100 件之后，
+**第 101 件开始 bot 就看不到了**，而且它不知道自己没看全。每次 P-Bandai 上新，
+最底下那件就被挤出窗口。实测有一件被挤出去之后再也没出现过。
+`state/seen.json` 同时涨到了 1500 多行。
 
-`Waiting,On` 这个组合被网站直接无视了。所以 v2 **不再依赖 URL 过滤**，
-改成读每张卡片上的状态标签自己判断。你要做的是把状态参数**去掉**：
+### 怎么改的
 
-GitHub repo → Settings → Secrets and variables → Actions → **Variables** →
-`WATCH_URLS` 改成这两行：
+P-Bandai 的列表页 HTML 里本来就嵌着完整的搜索结果 JSON（`PRELOAD_DATA`），
+服务器在任何 JavaScript 运行之前就写进去了：每件商品的编号、名字、价格、
+状态标签，还有整个查询的 **`totalCount`**。现在直接读这个：
 
-```
-https://p-bandai.com/sg/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival
-https://p-bandai.com/au/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival
-```
+| | v2（浏览器） | v3（读 JSON） |
+|---|---|---|
+| 依赖 | Playwright + Chromium | **无，纯标准库** |
+| 翻页 | 固定最多 5 页 | 按 `totalCount` **翻到底** |
+| 有没有抓全 | 不知道 | **抓到的件数必须等于 `totalCount`**，不等就当失败 |
+| 一次运行 | ~75 秒 | **~5 秒** |
+| state | 1507 行 | **~30 行** |
 
-`WATCH_URLS` 现在是**必填**，代码里没有硬编码的备用 URL。没设就直接 exit 2
-并打印怎么设，不会偷偷跑一份你早忘了的旧 URL。每次运行的 log 开头也会打印
-实际在监控哪几条，方便核对。
+商品编号用的是 `productCode`，就是商品 URL 里那一段，跟旧版存的 key 完全一样。
+状态标签取的是英文显示名，跟卡片上印的字一致（124 件逐一核对，0 件不同）。
+所以升级**不会**误报任何上新。
 
-### 2. 建议重置一次 state
+### state 只记录卖过的商品
 
-v1 会把页面底部 **RECOMMENDATIONS 轮播**里的商品（一堆高达）也当成结果抓进去，
-所以你现在的 `state/seen.json` 里有脏数据。v2 已经把抓取范围锁死在结果容器内，
-但旧记录还在。清一下：
+旧版把抓到的每件商品都存进 state，能不能买都存。v3 只记录**曾经能下单**的商品：
 
-```bash
-git pull
-echo '{"initialized": false, "items": {}, "updated_at": null}' > state/seen.json
-git commit -am "reset state for v2" && git push
-```
+- 一出现就是截单状态的商品不会存进去
+- 存进去之后就一直保留，截单了就标 `present: false`，重新开放会报 **♻️ 补货**
+- 第一次运行时自动迁移（`schema: 3`），把旧 state 里现在不能买的记录全部删掉
 
-下次跑会重新发一条「已启动」的消息，然后恢复正常。
-（不清也能跑，只是会留一堆用不到的旧记录。）
+**代价**：被删掉的那些旧商品里，如果哪件以后重新开放，会报 **🆕 上新**而不是
+♻️ 补货。通知照样会收到，只是标签不同。
 
-state 的 key 格式从 `<id>` 换成了 `<region>:<id>`（这样 SG 和 AU 同号商品不会撞车），
-旧记录会自动迁移成 `sg:` 前缀，不用你操心。
+### 为什么不用 `_f_productStatuses=Waiting,On`
+
+实测 2026-10-05：
+
+| | 不过滤 | `=On` | `=Waiting` | `=Waiting,On` |
+|---|---|---|---|---|
+| SG | 103 | 2 | 0 | 2 ✅ |
+| AU | 21 | 0 | 0 | **21 ❌** |
+
+单个值没问题，但 **`Waiting,On` 组合在两个状态都是 0 件时会被网站直接忽略**，
+返回全部商品。AU 现在全部截单，所以拿回整个列表。SG 看起来正常，只是因为
+刚好有 2 件在卖，这两件一截单 SG 就会变成跟 AU 一样。
+
+所以 URL **不加状态过滤**，能不能买由脚本根据每件商品自己的状态判断。
 
 ---
 
@@ -100,6 +113,7 @@ state 的 key 格式从 `<id>` 换成了 `<region>:<id>`（这样 SG 和 AU 同�
    （bot 要把 `state/seen.json` commit 回去记住看过哪些商品）
 
 4. Actions 标签页 → *P-Bandai restock check* → **Run workflow** 手动跑一次
+   （勾上 **dry_run** 就只打印结果：不发 Telegram，也不提交 state，排查问题用）
 
 ### 外部定时触发（Cloudflare Worker）
 
@@ -223,8 +237,10 @@ workflow **跑了并且失败**时才发——彻底没跑是不会有任何动�
 - **repo 60 天没活动**会自动停掉 `schedule`。不过 bot 每次跑都会 commit
   `state/seen.json`，活动一直有，实际不会触发这条；就算真被停了，
   Cloudflare 的 `workflow_dispatch` 也不受影响，照跑。
-- **抓取失败按站点隔离**：脚本检查结果容器 `.o-search-product` 在不在。某个站
-  找不到 → **只冻结这个站**，它的记录原样保留（不会被判成消失，恢复后也不会
+- **抓取失败按站点隔离**：一个站算"抓成功"必须同时满足：每一页都有
+  `PRELOAD_DATA`、翻页过程中 `totalCount` 没变、抓到的件数**正好等于** `totalCount`、
+  而且不是 0（系列页永远会列出东西，哪怕全是截单的）。任何一条不满足 →
+  **只冻结这个站**，它的记录原样保留（不会被判成消失，恢复后也不会
   误报一堆补货），其余站照常比对、照常发通知。**一个站挂掉不会连累别的站。**
   失败站点记在 state 的 `failed_regions` 字段里。
 - **部分失败不算运行失败**（exit 0）。好的站点已经正常比对并通知过了，
@@ -234,30 +250,25 @@ workflow **跑了并且失败**时才发——彻底没跑是不会有任何动�
   workflow failed 邮件，healthchecks 也会收到 `/fail` ping。
 - **bot 悄悄停掉是最危险的情况**（PAT 过期、Worker 挂了），因为没有任何东西会报错。
   配了「掉线告警」才有兜底，强烈建议配上。
-- **AU 站目前 0 件可下单**（19 件全部售完/预购截止），所以短期内只会收到 SG 的通知。
+- **AU 站目前 0 件可下单**（21 件全部售完/预购截止），所以短期内只会收到 SG 的通知。
   这是正常的，不是 bot 坏了。
-- **2026-08-07 起 AU 站开始读不到结果容器**（run #32）。页面本身能正常打开、
-  也没被封 IP，就是 `.o-search-product` 等 20 秒也不出现。最可能的原因是
-  AU 站该系列**筛选结果变成 0 件**了——页面不渲染结果容器，脚本没法区分
-  「0 件」和「抓取失败」，只能当失败处理。这正是上面「按站点隔离」要解决的场景。
+### 抓取逻辑已在真实页面验证（2026-10-05）
 
-### 抓取逻辑已在真实页面验证（2026-08-05）
+| 页面 | `totalCount` | 抓到 | 翻页 | 可下单 |
+|---|---|---|---|---|
+| SG One Piece | 103 | 103 | 6 页 | 2 件（PRE-ORDER） |
+| AU One Piece | 21 | 21 | 2 页 | 0 件（PRE-ORDER CLOSED / OUT OF STOCK） |
 
-| 页面 | 抓到 | 可下单 | 状态标签 |
-|---|---|---|---|
-| SG One Piece | 4 件 | 4 件 | PRE-ORDER |
-| AU One Piece | 19 件 | 0 件 | OUT OF STOCK / PRE-ORDER CLOSED |
-
-两个站的推荐位商品都已正确排除（SG 8 件、AU 8 件高达）。
+`PRELOAD_DATA` 里只有搜索结果本身，页面底部的推荐位轮播（一堆高达）
+不在里面，不需要再特意排除。
 
 ---
 
 ## 四、本地跑（调试用）
 
-```bash
-pip install -r requirements.txt
-python -m playwright install chromium
+没有任何依赖要装，Python 3.9+ 就行：
 
+```bash
 export WATCH_URLS='https://p-bandai.com/sg/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival
 https://p-bandai.com/au/series/onepiece-series?_f_series=03-002&offset=0&limit=20&sortType=NewArrival'
 
@@ -269,7 +280,7 @@ DRY_RUN=1 python check.py     # 只打印不发消息
 ## 五、换别的系列
 
 在网站上筛选好，复制地址栏 URL 放进 `WATCH_URLS`（多条换行分隔）。
-**建议把 `_f_productStatuses=...` 删掉**——反正脚本自己会过滤，留着反而可能触发上面那个 bug。
+**把 `_f_productStatuses=...` 删掉**。`Waiting,On` 在没有匹配商品时会被网站直接忽略（见上面 v3 说明），而且脚本本来就会自己判断能不能买。
 
 ---
 
@@ -283,15 +294,20 @@ DRY_RUN=1 python check.py     # 只打印不发消息
 | `HEALTHCHECK_URL` | — | healthchecks.io 的 ping URL。不设=关闭掉线告警。当密码看，放 Secrets |
 | `ALERT_ON_ALL` | — | `1` = 连售完的也通知（默认只通知能下单的） |
 | `STATE_FILE` | — | 默认 `state/seen.json` |
-| `MAX_PAGES` | — | 最多翻几页，默认 5 |
-| `DRY_RUN` | — | `1` = 只打印不发送 |
+| `MAX_PAGES` | — | 翻页上限，默认 50。只是防止失控，不是抓取窗口：列表超过 `MAX_PAGES × limit` 件时整个站当失败，**不会悄悄截断** |
+| `REQUEST_DELAY` | — | 翻页之间等几秒，默认 0.5 |
+| `DRY_RUN` | — | `1` = 只打印不发送（Actions 页面手动运行时勾 `dry_run` 也是这个效果） |
 
 ---
 
 ## 七、什么算「能下单」
 
-用排除法：卡片标签里含下面任一关键词就跳过，其余全部通知。
+用排除法：标签里含下面任一关键词就跳过，其余全部通知。
 这样即使 Bandai 出了个没见过的新标签，也不会被误杀。
+
+另外 P-Bandai 自己的销售状态 `saleStatus` 是 **`End`** 的也跳过，不管标签写什么。
+目前所有 `End` 的商品同时也带 CLOSED / OUT OF STOCK 标签，所以这条现在不改变任何结果；
+它是防将来哪件商品已经结束销售、却没带标签，被排除法当成"能买"放过去。
 
 ```
 OUT OF STOCK / SOLD OUT / CLOSED / NO LONGER AVAILABLE /
