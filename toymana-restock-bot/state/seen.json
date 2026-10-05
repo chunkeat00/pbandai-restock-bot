@@ -1,1 +1,727 @@
-{"initialized": false, "items": {}, "updated_at": null}
+{
+  "failed_groups": [],
+  "initialized": true,
+  "items": {
+    "toymana.com/beyblade:10004769898775": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$26.95",
+      "title": "Beyblade X CX-07 Starter Pegasus Blast ATR",
+      "url": "https://www.toymana.com/products/956976"
+    },
+    "toymana.com/beyblade:10004769964311": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$16.95",
+      "title": "Beyblade X CX-08 Random Booster",
+      "url": "https://www.toymana.com/products/956983"
+    },
+    "toymana.com/beyblade:10004769997079": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X BXG-20 BX-00 Booster Rock Leone 6-80GN",
+      "url": "https://www.toymana.com/products/957492"
+    },
+    "toymana.com/beyblade:10024904229143": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X BX-45 Samurai Calibur 6-70M",
+      "url": "https://www.toymana.com/products/939580"
+    },
+    "toymana.com/beyblade:10056805351703": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$26.95",
+      "title": "Beyblade X CX-09 Starter Soleclipse",
+      "url": "https://www.toymana.com/products/995678"
+    },
+    "toymana.com/beyblade:10063911026967": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$99.95",
+      "title": "Beyblade X BX-46 Battle Entry Set Infinity ∞",
+      "url": "https://www.toymana.com/products/997610"
+    },
+    "toymana.com/beyblade:10063911092503": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$12.95",
+      "title": "Beyblade X BX-47 L-String Launcher Red Ver.",
+      "url": "https://www.toymana.com/products/097396"
+    },
+    "toymana.com/beyblade:10063911125271": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$14.95",
+      "title": "Beyblade X UX-16 Random Booster Clock Mirage Select",
+      "url": "https://www.toymana.com/products/990154"
+    },
+    "toymana.com/beyblade:10090128212247": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X CX-10 Booster Wolfhunt F0-60DB",
+      "url": "https://www.toymana.com/products/097242"
+    },
+    "toymana.com/beyblade:10090128245015": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$49.95",
+      "title": "Beyblade X CX-11 Emperormight Deckset",
+      "url": "https://www.toymana.com/products/098775"
+    },
+    "toymana.com/beyblade:10145538310423": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X UX-18 Random Booster Vol. 8 Mummy Curse",
+      "url": "https://www.toymana.com/products/97167"
+    },
+    "toymana.com/beyblade:10145538343191": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X BXG-22 BX-00 Booster Dragoon Storm 4-60RA",
+      "url": "https://www.toymana.com/products/99468"
+    },
+    "toymana.com/beyblade:10154689134871": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$17.95",
+      "title": "Beyblade X CX-12 Booster Phoenix Flare Z9-80WW",
+      "url": "https://www.toymana.com/products/096153"
+    },
+    "toymana.com/beyblade:10252061770007": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$22.95",
+      "title": "Beyblade X CX-13 Starter BA Bahamutblitz BK1-50I",
+      "url": "https://www.toymana.com/products/097259"
+    },
+    "toymana.com/beyblade:10252061802775": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$22.95",
+      "title": "Beyblade X CX-14 Starter KN Knightfortress GV8-70UN",
+      "url": "https://www.toymana.com/products/097266"
+    },
+    "toymana.com/beyblade:10252061835543": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$16.95",
+      "title": "Beyblade X CX-15 Booster RA \nRagnarage FE4-55Y",
+      "url": "https://www.toymana.com/products/097273"
+    },
+    "toymana.com/beyblade:10252061868311": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$89.95",
+      "title": "Beyblade X CX-16  Start Dash Set C",
+      "url": "https://www.toymana.com/products/097280"
+    },
+    "toymana.com/beyblade:10252061901079": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$22.95",
+      "title": "Beyblade X BXG-21 Starter Storm Spriggan 2-70M",
+      "url": "https://www.toymana.com/products/997351le"
+    },
+    "toymana.com/beyblade:10252061999383": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$11.95",
+      "title": "Beyblade X BXG-62 BX-00 String Launcher [B4 Store Limited Color Ver. - Pink/Green/Orange]",
+      "url": "https://www.toymana.com/products/080565le"
+    },
+    "toymana.com/beyblade:10292955414807": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$26.95",
+      "title": "Beyblade X UX-19 Bullet Griffon H",
+      "url": "https://www.toymana.com/products/096160"
+    },
+    "toymana.com/beyblade:10310891340055": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X CX-17 Random Booster Vol.10",
+      "url": "https://www.toymana.com/products/096146"
+    },
+    "toymana.com/beyblade:10325403861271": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$22.95",
+      "title": "Beyblade X BX-49 Starter Dranstrike 4-50FF",
+      "url": "https://www.toymana.com/products/096122"
+    },
+    "toymana.com/beyblade:10370032566551": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$12.95",
+      "title": "Beyblade X BX-51 String Launcher Black x Green",
+      "url": "https://www.toymana.com/products/089261"
+    },
+    "toymana.com/beyblade:10370032599319": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X CX-18 Random Booster Brachio Whip OW5-70Nr",
+      "url": "https://www.toymana.com/products/096177"
+    },
+    "toymana.com/beyblade:10404513972503": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$16.95",
+      "title": "Beyblade X BX-50 Random Booster Vol.11 HeavensRing 0-80DS",
+      "url": "https://www.toymana.com/products/084174"
+    },
+    "toymana.com/beyblade:10404514038039": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$27.95",
+      "title": "Beyblade X UX-20 Starter GloryValkyrie LF",
+      "url": "https://www.toymana.com/products/096139"
+    },
+    "toymana.com/beyblade:10404514103575": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$27.95",
+      "title": "Beyblade X BXG-47 BX-00 Starter StormPegasis 3-70RA",
+      "url": "https://www.toymana.com/products/096504le"
+    },
+    "toymana.com/beyblade:10465922187543": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$45.95",
+      "title": "Beyblade X UX-21 Hell's Nether Deck Set",
+      "url": "https://www.toymana.com/products/85546"
+    },
+    "toymana.com/beyblade:10465922285847": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X BXG-49 BX-00 B4 Store Limited Dransword 3-60F Version 2",
+      "url": "https://www.toymana.com/products/080657le"
+    },
+    "toymana.com/beyblade:10550039183639": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$11.95",
+      "title": "Beyblade X BX-57 3-ON-3 Deck Case Black",
+      "url": "https://www.toymana.com/products/059905"
+    },
+    "toymana.com/beyblade:10550039249175": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X CX-19 Random BoosterCrocodile Red Select",
+      "url": "https://www.toymana.com/products/080626"
+    },
+    "toymana.com/beyblade:8861586751767": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$44.95",
+      "title": "Beyblade X BX 10 BeyStadium",
+      "url": "https://www.toymana.com/products/910596"
+    },
+    "toymana.com/beyblade:8861586784535": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$7.95",
+      "title": "Beyblade X BX 11 Launcher Grip",
+      "url": "https://www.toymana.com/products/910787"
+    },
+    "toymana.com/beyblade:8966830653719": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$11.95",
+      "title": "Beyblade X BX-18 String Launcher Black ver.",
+      "url": "https://www.toymana.com/products/913054"
+    },
+    "toymana.com/beyblade:8966830817559": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$25.95",
+      "title": "Beyblade X BX-23 Starter Phoenix Wing 9-60 GF",
+      "url": "https://www.toymana.com/products/913092"
+    },
+    "toymana.com/beyblade:9002615701783": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$49.95",
+      "title": "Beyblade X BX-25 Bey Case",
+      "url": "https://www.toymana.com/products/913320"
+    },
+    "toymana.com/beyblade:9086260773143": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X BX-27 Short Random Booster Vol.2",
+      "url": "https://www.toymana.com/products/beyblade-x-bx-27-short-random-booster-vol-2"
+    },
+    "toymana.com/beyblade:9108712030487": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$11.95",
+      "title": "Beyblade X BX-28 String Launcher White Ver.",
+      "url": "https://www.toymana.com/products/914518"
+    },
+    "toymana.com/beyblade:9108712096023": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$11.95",
+      "title": "Beyblade X BX-29 Grip A White Ver.",
+      "url": "https://www.toymana.com/products/914525"
+    },
+    "toymana.com/beyblade:9108712194327": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$11.95",
+      "title": "Beyblade X BX-30 Grip B Red Ver.",
+      "url": "https://www.toymana.com/products/926702"
+    },
+    "toymana.com/beyblade:9108712325399": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X BXG-06 (BX-00) Shark Edge 5-60GF Booster (Blue Metallic Coat)",
+      "url": "https://www.toymana.com/products/936121le"
+    },
+    "toymana.com/beyblade:9184929448215": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$20.95",
+      "title": "Beyblade X UX-01 Starter Dranbuster 1-60A",
+      "url": "https://www.toymana.com/products/beyblade-x-ux-01-starter-dranbuster-1-60a"
+    },
+    "toymana.com/beyblade:9184930562327": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$20.95",
+      "title": "Beyblade X UX-02 Starter Hells Hammer 3-70H",
+      "url": "https://www.toymana.com/products/beyblade-x-ux-02-starter-hells-hammer-3-70h"
+    },
+    "toymana.com/beyblade:9184933314839": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X UX-03 Booster Wizard Rod 5-70DB",
+      "url": "https://www.toymana.com/products/beyblade-x-ux-03-booster-wizard-rod-5-70db"
+    },
+    "toymana.com/beyblade:9262724153623": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X BXG-06 (BX-00) Dranzer Spiral 3-80T",
+      "url": "https://www.toymana.com/products/beyblade-x-bxg-06-bx-00-shed"
+    },
+    "toymana.com/beyblade:9369037177111": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X BXG-04 Booster Driger Slash",
+      "url": "https://www.toymana.com/products/930341le"
+    },
+    "toymana.com/beyblade:9369037242647": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$84.95",
+      "title": "Beyblade X UX-04 All In One Set Drbu",
+      "url": "https://www.toymana.com/products/914501"
+    },
+    "toymana.com/beyblade:9369037308183": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$49.95",
+      "title": "Beyblade X BX-09 Beybattle Pass",
+      "url": "https://www.toymana.com/products/905240"
+    },
+    "toymana.com/beyblade:9369037340951": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X BX-31 Random Booster Vol.03",
+      "url": "https://www.toymana.com/products/914532"
+    },
+    "toymana.com/beyblade:9483175624983": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X UX-05 Random Booster Shinobi Shadow",
+      "url": "https://www.toymana.com/products/914549"
+    },
+    "toymana.com/beyblade:9483175657751": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X BX-33 Booster Weiss Tiger",
+      "url": "https://www.toymana.com/products/914556"
+    },
+    "toymana.com/beyblade:9577753379095": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X BX-35 Random Booster Vol. 04",
+      "url": "https://www.toymana.com/products/beyblade-x-bx-35-random-booster-vol-04"
+    },
+    "toymana.com/beyblade:9577759047959": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$24.95",
+      "title": "Beyblade X BX-34 Starter Cobalt Dragoon",
+      "url": "https://www.toymana.com/products/beyblade-x-bx-34-starter-cobalt-dragoon"
+    },
+    "toymana.com/beyblade:9577769795863": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$59.95",
+      "title": "Beyblade X BX-32 Wide Stadium",
+      "url": "https://www.toymana.com/products/beyblade-x-bx-32-wide-stadium"
+    },
+    "toymana.com/beyblade:9637368627479": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X UX-06 Booster Leon Crest",
+      "url": "https://www.toymana.com/products/beyblade-x-ux-06-booster-leon-crest"
+    },
+    "toymana.com/beyblade:9637370855703": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$39.95",
+      "title": "Beyblade X UX-07 Phoenix Rudder Deck Set",
+      "url": "https://www.toymana.com/products/beyblade-x-ux-07-phoenix-rudder-deck-set"
+    },
+    "toymana.com/beyblade:9702587007255": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X BXG-07 Booster DR-ST",
+      "url": "https://www.toymana.com/products/930358"
+    },
+    "toymana.com/beyblade:9702589071639": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X BX-36 Select Random Booster",
+      "url": "https://www.toymana.com/products/beyblade-x-bx-36-select-random-booster"
+    },
+    "toymana.com/beyblade:9740450922775": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$99.95",
+      "title": "Beyblade X BX-37 Double Xtreme Stadium Set",
+      "url": "https://www.toymana.com/products/939481"
+    },
+    "toymana.com/beyblade:9740451348759": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "BX-38 Booster Crimson Garuda 4-70TP",
+      "url": "https://www.toymana.com/products/939504"
+    },
+    "toymana.com/beyblade:9740451774743": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$20.95",
+      "title": "Beyblade X UX-08 Starter Silver Wolf 3-80FB",
+      "url": "https://www.toymana.com/products/939498"
+    },
+    "toymana.com/beyblade:9740452069655": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$33.95",
+      "title": "Beyblade X UX-09 Starter Samurai Saber 2-70L",
+      "url": "https://www.toymana.com/products/939535"
+    },
+    "toymana.com/beyblade:9817614942487": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$26.95",
+      "title": "Beyblade X UX-11 Starter Impact Drake",
+      "url": "https://www.toymana.com/products/beyblade-x-ux-11-starter-impact-drake"
+    },
+    "toymana.com/beyblade:9817615859991": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X UX-12 Random Booster Vol. 5 Ghost Circle",
+      "url": "https://www.toymana.com/products/ux-12-random-booster-vol-5"
+    },
+    "toymana.com/beyblade:9817616449815": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$16.95",
+      "title": "Beyblade X BXG-11 Booster Draciel Shield",
+      "url": "https://www.toymana.com/products/bxg-11-draciel-shield-booster"
+    },
+    "toymana.com/beyblade:9864990458135": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade UX-13 Jan Booster Goro (Golem Rock 1-60UN)",
+      "url": "https://www.toymana.com/products/beyblade-ux-13-golem-rock-1-60un"
+    },
+    "toymana.com/beyblade:9891814113559": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X BX-39 Random Booster Shelter Drake",
+      "url": "https://www.toymana.com/products/939511"
+    },
+    "toymana.com/beyblade:9904021831959": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$11.95",
+      "title": "Beyblade X BX-40 Winder Launcher L",
+      "url": "https://www.toymana.com/products/958765"
+    },
+    "toymana.com/beyblade:9904021864727": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$13.95",
+      "title": "Beyblade X BX-41 Rubber Custom Grip (Gunmetal Ver.)",
+      "url": "https://www.toymana.com/products/958482"
+    },
+    "toymana.com/beyblade:9904021897495": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$13.95",
+      "title": "Beyblade X BX-42 Rubber Custom Grip (Blue Ver.)",
+      "url": "https://www.toymana.com/products/958536"
+    },
+    "toymana.com/beyblade:9904021930263": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$22.95",
+      "title": "Beyblade X CX-01 Starter DranBrave S6-60V",
+      "url": "https://www.toymana.com/products/939597"
+    },
+    "toymana.com/beyblade:9904021963031": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$22.95",
+      "title": "Beyblade X CX-02 Starter WizardArc R4-55LO",
+      "url": "https://www.toymana.com/products/939603"
+    },
+    "toymana.com/beyblade:9904022126871": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$84.95",
+      "title": "Beyblade X CX-04 Battle Entry Set C",
+      "url": "https://www.toymana.com/products/939634"
+    },
+    "toymana.com/beyblade:9921727758615": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$49.95",
+      "title": "Beyblade X BX-43 Bey Case White",
+      "url": "https://www.toymana.com/products/958796"
+    },
+    "toymana.com/beyblade:9921727824151": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$30.95",
+      "title": "Beyblade X BXG-13 Xeno Xcalibur 3-60GF",
+      "url": "https://www.toymana.com/products/946823le"
+    },
+    "toymana.com/beyblade:9931102060823": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$22.95",
+      "title": "Beyblade X UX-14 Starter Scorpio Spear 0-70Z",
+      "url": "https://www.toymana.com/products/958499"
+    },
+    "toymana.com/beyblade:9940699185431": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": true,
+      "price": "SG$16.95",
+      "title": "BEYBLADE X CX-06 Random Booster FoxBrush Select",
+      "url": "https://www.toymana.com/products/beyblade-x-cx-05-random-booster-vol-6-hells-reaper-t4-70k-copy"
+    },
+    "toymana.com/beyblade:9970353701143": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$14.95",
+      "title": "Beyblade X BX-44 Booster TriceraPress M-85BS",
+      "url": "https://www.toymana.com/products/939528"
+    },
+    "toymana.com/beyblade:9995768496407": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$34.95",
+      "title": "Beyblade BXG-40 Double Starter Jurassic World Collad A Mosasaurus Vs T-Rex",
+      "url": "https://www.toymana.com/products/996552le"
+    },
+    "toymana.com/beyblade:9995768529175": {
+      "first_seen": "2026-10-05T09:46:56+00:00",
+      "group": "toymana.com/beyblade",
+      "last_seen": "2026-10-05T09:46:56+00:00",
+      "present": false,
+      "price": "SG$34.95",
+      "title": "Beyblade BXG-41 Double Starter Jurassic World Collad A Spinosaurus Vs Quetzalcoatlus",
+      "url": "https://www.toymana.com/products/996569le"
+    }
+  },
+  "updated_at": "2026-10-05T09:46:58+00:00"
+}
