@@ -125,34 +125,16 @@ P-Bandai 的列表页 HTML 里本来就嵌着完整的搜索结果 JSON（`PRELO
 触发 `workflow_dispatch`。dispatch 事件不走那个会丢包的排程队列，叫了就跑。
 workflow 里的 `schedule` 保留在 `:53` 当兜底，Cloudflare 挂了还有一层。
 
-Worker 代码（Cloudflare Dashboard → Workers & Pages → `pbandai-trigger`）：
+Worker 代码在 [`cloudflare/worker.js`](cloudflare/worker.js)
+（Cloudflare Dashboard → Workers & Pages → `pbandai-trigger`）。这个 repo 里的
+**三个 bot 共用这一个 Worker**，按触发的分钟数分别 dispatch 各自的 workflow。
+改代码就改那个文件，然后整段粘贴进 Cloudflare 编辑器、Deploy。
 
-```js
-export default {
-  async scheduled(event, env, ctx) {
-    const res = await fetch(
-      "https://api.github.com/repos/chunkeat00/pbandai-restock-bot/actions/workflows/check.yml/dispatches",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${env.GITHUB_PAT}`,
-          Accept: "application/vnd.github+json",
-          "User-Agent": "pbandai-restock-trigger",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ref: "main" }),
-      }
-    );
-    if (!res.ok) console.log(`dispatch failed: ${res.status} ${await res.text()}`);
-  },
-};
-```
-
-Worker 的 Settings 里要配两样：
+Worker 的 Settings 里要配两样（**加了 cron 之后要再 Deploy 一次**，否则只显示 Next 时间、不会真的触发）：
 
 | 项目 | 值 |
 |---|---|
-| Cron Triggers | `23 * * * *` |
+| Cron Triggers | `23 * * * *`（pbandai）、`38 * * * *`（KGB）、`46 * * * *`（Toymana） |
 | Variables and Secrets | `GITHUB_PAT`（类型选 **Secret**，不是 Text） |
 
 `GITHUB_PAT` 是 GitHub 的 **fine-grained PAT**（Settings → Developer settings →

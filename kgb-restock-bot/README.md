@@ -76,39 +76,10 @@ Telegram 的两个 secret 跟 pbandai bot 共用，不用重新设。要做的�
 
 ### 1. Cloudflare Worker 加一条 cron
 
-沿用已有的那个 Worker（`pbandai-trigger`），加第二条 cron 触发器 `38 * * * *`，
-然后把代码换成按 `event.cron` 分派：
-
-```js
-const REPO = "chunkeat00/pbandai-restock-bot";
-
-// 哪条 cron 触发哪个 workflow。错开分钟数，两个 bot 不会同时往 main 推 state。
-const JOBS = {
-  "23 * * * *": "check.yml",       // pbandai
-  "38 * * * *": "kgb-check.yml",   // beyblade
-};
-
-export default {
-  async scheduled(event, env, ctx) {
-    const wf = JOBS[event.cron];
-    if (!wf) return;
-    const res = await fetch(
-      `https://api.github.com/repos/${REPO}/actions/workflows/${wf}/dispatches`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${env.GITHUB_PAT}`,
-          Accept: "application/vnd.github+json",
-          "User-Agent": "pbandai-restock-trigger",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ref: "main" }),
-      }
-    );
-    if (!res.ok) console.log(`${wf} dispatch failed: ${res.status} ${await res.text()}`);
-  },
-};
-```
+沿用已有的那个 Worker（`pbandai-trigger`），加 cron 触发器 `38 * * * *`。
+代码用 [`cloudflare/worker.js`](../cloudflare/worker.js)：三个 bot 共用这一个 Worker，
+按触发的分钟数分别 dispatch。**加完 cron 要再 Deploy 一次**，否则只显示 Next 时间、
+不会真的触发（2026-09-03 实测踩过）。
 
 同一个 PAT、同一个 Worker、同一个 repo，不用建新的。
 
@@ -129,20 +100,22 @@ healthchecks.io 上**新建一个 check**（不要复用 pbandai 那个，否则
 
 ## 四、触发时刻表
 
-四个事件均匀分布在一小时里，互不排队、互不抢 push：
+三个 bot 的六个触发点错开排在一小时里，每次运行十几秒就结束，互相之间至少隔 7 分钟：
 
 | 分钟 | 谁 | 什么 |
 |---|---|---|
 | `:08` | GitHub schedule | beyblade **备胎** |
+| `:16` | GitHub schedule | toymana **备胎** |
 | `:23` | Cloudflare Worker | pbandai **主力** |
 | `:38` | Cloudflare Worker | beyblade **主力** |
+| `:46` | Cloudflare Worker | toymana **主力** |
 | `:53` | GitHub schedule | pbandai **备胎** |
 
 为什么主力是 Cloudflare 而不是 GitHub 自己的 cron，见
 [pbandai 的 README](../README.md)——简单说就是 GitHub 的 `schedule` 会在高负载时
 **直接丢弃**任务，实测命中率只有 13%。
 
-两个 workflow 都会往 `main` 推 state，所以 push 步骤都加了 **rebase 重试**
+三个 workflow 都会往 `main` 推 state，所以 push 步骤都加了 **rebase 重试**
 （最多 3 次）。抢输了是正常现象，不是错误。
 
 ---

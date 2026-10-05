@@ -1,0 +1,74 @@
+name: Toymana restock check
+
+on:
+  schedule:
+    # 备胎，不是主力。主触发是 Cloudflare Worker，每小时 :46 打
+    # workflow_dispatch API 过来（Worker 代码见 cloudflare/worker.js）。
+    #
+    # 三个 bot 的六个触发点错开排在一小时里：
+    #   :08 kgb 备胎   :16 toymana 备胎   :23 pbandai 主力
+    #   :38 kgb 主力   :46 toymana 主力   :53 pbandai 备胎
+    # 每次运行十几秒就结束，互相之间至少隔 7 分钟。
+    - cron: "16 * * * *"
+  workflow_dispatch:        # Cloudflare Worker 和手动运行都走这个
+    inputs:
+      dry_run:
+        # 手动排查用：Run workflow 时勾上，只打印不发 Telegram，也不提交 state。
+        # Cloudflare 那边不带这个参数，默认就是 false。
+        description: "Dry run：只打印，不发 Telegram、不提交 state"
+        type: boolean
+        default: false
+
+concurrency:
+  group: toymana-check
+  cancel-in-progress: false
+
+permissions:
+  contents: write           # 需要把 state/seen.json commit 回去
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # 没有 pip install。Shopify 每个分类都有现成的 products.json，
+      # 标准库 urllib 就够了，一次运行不到 1 秒。
+
+      - name: Run check
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TOYMANA_WATCH_URLS: ${{ vars.TOYMANA_WATCH_URLS }}            # 不设就用默认的 beyblade 分类
+          HEALTHCHECK_URL: ${{ secrets.TOYMANA_HEALTHCHECK_URL }}       # 不设就自动关闭
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: python toymana-restock-bot/check.py
+
+      - name: Commit updated state
+        if: success() && !inputs.dry_run
+        run: |
+          git config user.name  "toymana-bot"
+          git config user.email "actions@github.com"
+          git add toymana-restock-bot/state/seen.json
+          if git diff --staged --quiet; then
+            echo "no state change"
+            exit 0
+          fi
+          git commit -m "state: update toymana seen items [skip ci]"
+          # 这个 repo 有三个 bot 在往 main 推 state。抢输了是正常现象，
+          # 不是错误——rebase 到对方的提交上面再试一次就好。各自写各自的
+          # state 文件，所以 rebase 不会冲突。
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected, rebasing (attempt $i)"
+            git pull --rebase --autostash origin main || true
+            sleep $((i * 3))
+          done
+          echo "push failed after 3 attempts" >&2
+          exit 1
