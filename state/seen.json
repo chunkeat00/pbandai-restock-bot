@@ -7,7 +7,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-05T14:24:03+00:00",
+      "last_seen": "2026-10-05T15:24:03+00:00",
       "present": true,
       "price": "SG$118.00",
       "region": "sg",
@@ -19,7 +19,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-05T14:24:03+00:00",
+      "last_seen": "2026-10-05T15:24:03+00:00",
       "present": true,
       "price": "SG$118.00",
       "region": "sg",
@@ -28,5 +28,5 @@
     }
   },
   "schema": 3,
-  "updated_at": "2026-10-05T14:24:03+00:00"
+  "updated_at": "2026-10-05T15:24:03+00:00"
 }
