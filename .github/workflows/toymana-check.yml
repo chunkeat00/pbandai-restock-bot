@@ -32,7 +32,14 @@ jobs:
     timeout-minutes: 10
 
     steps:
+      # ref 指定分支，checkout 拿的就是这个 job *开始跑时* 分支上的最新提交；
+      # 不指定的话拿的是运行被*创建*时的提交。迟到的 GitHub 备胎可能跟
+      # Cloudflare 那次几乎同时被创建，后到的那次虽然会排队等前一次跑完，
+      # 却仍然从前一次之前的旧 state 开始比对：同一条补货会通知两遍，
+      # push 时还会跟前一次的 state 提交冲突。
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
 
       - uses: actions/setup-python@v6
         with:

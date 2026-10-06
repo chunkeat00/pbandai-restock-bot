@@ -10,8 +10,8 @@ on:
     # 换个冷门分钟只能提高概率，治不了根，所以才加了外部触发。
     #
     # 设在 :53 而不是 :23，是为了跟 Cloudflare 错开半小时——真要靠它兜底时，
-    # 覆盖间隔不会变成整整两小时。两边同时触发也没事，下面的 concurrency
-    # 会让后到的那次排队等前一次跑完，不会两个一起 git push 打架。
+    # 覆盖间隔不会变成整整两小时。两边同时触发也没事：concurrency 让后到的
+    # 那次排队等前一次跑完，checkout 的 ref 让它从前一次写好的 state 开始。
     - cron: "53 * * * *"
   workflow_dispatch:        # Cloudflare Worker 和 Actions 页面手动运行都走这个
     inputs:
@@ -37,7 +37,15 @@ jobs:
     steps:
       # Node 24 runtimes. v4/v5 of these actions targeted Node 20, which is
       # deprecated and currently force-run on Node 24 with a warning.
+      #
+      # ref 指定分支，checkout 拿的就是这个 job *开始跑时* 分支上的最新提交；
+      # 不指定的话拿的是运行被*创建*时的提交。迟到的 GitHub 备胎可能跟
+      # Cloudflare 那次几乎同时被创建，后到的那次虽然会排队等前一次跑完，
+      # 却仍然从前一次之前的旧 state 开始比对：同一条补货会通知两遍，
+      # push 时还会跟前一次的 state 提交冲突。
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
 
       - uses: actions/setup-python@v6
         with:
