@@ -2,12 +2,24 @@
   "failed_regions": [],
   "initialized": true,
   "items": {
+    "sg:A2866726003": {
+      "first_seen": "2026-10-06T03:21:58+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-10-06T03:21:58+00:00",
+      "present": true,
+      "price": "SG$163.00",
+      "region": "sg",
+      "title": "ONE PIECE CARD GAME 4TH ANNIVERSARY SET [JUN 2027 DELIVERY]",
+      "url": "https://p-bandai.com/sg/item/A2866726003"
+    },
     "sg:AZ005736001": {
       "first_seen": "2026-08-27T03:24:11+00:00",
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-06T02:23:59+00:00",
+      "last_seen": "2026-10-06T03:21:58+00:00",
       "present": true,
       "price": "SG$118.00",
       "region": "sg",
@@ -19,7 +31,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-06T02:23:59+00:00",
+      "last_seen": "2026-10-06T03:21:58+00:00",
       "present": true,
       "price": "SG$118.00",
       "region": "sg",
@@ -28,5 +40,5 @@
     }
   },
   "schema": 3,
-  "updated_at": "2026-10-06T02:23:59+00:00"
+  "updated_at": "2026-10-06T03:22:00+00:00"
 }
