@@ -7,8 +7,8 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-07T10:24:01+00:00",
-      "present": false,
+      "last_seen": "2026-10-07T14:24:03+00:00",
+      "present": true,
       "price": "SG$163.00",
       "region": "sg",
       "title": "ONE PIECE CARD GAME 4TH ANNIVERSARY SET [JUN 2027 DELIVERY]",
@@ -19,7 +19,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-07T13:23:58+00:00",
+      "last_seen": "2026-10-07T14:24:03+00:00",
       "present": true,
       "price": "SG$240.00",
       "region": "sg",
@@ -31,7 +31,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-07T13:23:58+00:00",
+      "last_seen": "2026-10-07T14:24:03+00:00",
       "present": true,
       "price": "SG$53.00",
       "region": "sg",
@@ -43,7 +43,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-07T13:23:58+00:00",
+      "last_seen": "2026-10-07T14:24:03+00:00",
       "present": true,
       "price": "SG$91.00",
       "region": "sg",
@@ -55,7 +55,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-07T13:23:58+00:00",
+      "last_seen": "2026-10-07T14:24:03+00:00",
       "present": true,
       "price": "SG$118.00",
       "region": "sg",
@@ -67,7 +67,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-07T13:23:58+00:00",
+      "last_seen": "2026-10-07T14:24:03+00:00",
       "present": true,
       "price": "SG$118.00",
       "region": "sg",
@@ -76,5 +76,5 @@
     }
   },
   "schema": 3,
-  "updated_at": "2026-10-07T13:23:58+00:00"
+  "updated_at": "2026-10-07T14:24:05+00:00"
 }
