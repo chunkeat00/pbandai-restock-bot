@@ -8,18 +8,54 @@
         "PRE-ORDER"
       ],
       "last_seen": "2026-10-07T02:23:53+00:00",
-      "present": true,
+      "present": false,
       "price": "SG$163.00",
       "region": "sg",
       "title": "ONE PIECE CARD GAME 4TH ANNIVERSARY SET [JUN 2027 DELIVERY]",
       "url": "https://p-bandai.com/sg/item/A2866726003"
+    },
+    "sg:A2904536001": {
+      "first_seen": "2026-10-07T03:24:29+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-10-07T03:24:29+00:00",
+      "present": true,
+      "price": "SG$240.00",
+      "region": "sg",
+      "title": "PORTRAIT. OF. PIRATES ONE PIECE “SA-MAXIMUM”MONKEY.D.LUFFY GEAR4 BOUNCE-MAN 10TH LIMITED VER.",
+      "url": "https://p-bandai.com/sg/item/A2904536001"
+    },
+    "sg:A2912578001": {
+      "first_seen": "2026-10-07T03:24:29+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-10-07T03:24:29+00:00",
+      "present": true,
+      "price": "SG$53.00",
+      "region": "sg",
+      "title": "WALLSTAR ONE PIECE MONKEY D. LUFFY GEAR5 & RORONOA ZORO SET【WITH GIFT】",
+      "url": "https://p-bandai.com/sg/item/A2912578001"
+    },
+    "sg:A2913346001": {
+      "first_seen": "2026-10-07T03:24:29+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-10-07T03:24:29+00:00",
+      "present": true,
+      "price": "SG$91.00",
+      "region": "sg",
+      "title": "VARIABLE ACTION HEROES ONE PIECE PORTGAS D. ACE",
+      "url": "https://p-bandai.com/sg/item/A2913346001"
     },
     "sg:AZ005736001": {
       "first_seen": "2026-08-27T03:24:11+00:00",
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-07T02:23:53+00:00",
+      "last_seen": "2026-10-07T03:24:29+00:00",
       "present": true,
       "price": "SG$118.00",
       "region": "sg",
@@ -31,7 +67,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-07T02:23:53+00:00",
+      "last_seen": "2026-10-07T03:24:29+00:00",
       "present": true,
       "price": "SG$118.00",
       "region": "sg",
@@ -40,5 +76,5 @@
     }
   },
   "schema": 3,
-  "updated_at": "2026-10-07T02:23:54+00:00"
+  "updated_at": "2026-10-07T03:24:30+00:00"
 }
