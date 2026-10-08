@@ -1,15 +1,13 @@
 name: Toymana restock check
 
 on:
-  schedule:
-    # 备胎，不是主力。主触发是 Cloudflare Worker，每小时 :46 打
-    # workflow_dispatch API 过来（Worker 代码见 cloudflare/worker.js）。
-    #
-    # 三个 bot 的六个触发点错开排在一小时里：
-    #   :08 kgb 备胎   :16 toymana 备胎   :23 pbandai 主力
-    #   :38 kgb 主力   :46 toymana 主力   :53 pbandai 备胎
-    # 每次运行十几秒就结束，互相之间至少隔 7 分钟。
-    - cron: "16 * * * *"
+  # 唯一的触发方式：Cloudflare Worker 每 15 分钟调一次 workflow_dispatch API，
+  # 三个 bot 轮流，彼此错开 5 分钟（时刻表和改频率的方法见 cloudflare/worker.js）。
+  #
+  # 以前这里还有一个 GitHub `schedule` 当备胎。2026-10-05 到 10-08 三天里，
+  # 三个备胎合计跑了 34 次，没有一次是 Cloudflare 漏掉、靠它补上的，全是重复跑；
+  # 它本身又经常迟到 25–40 分钟。所以拿掉了。Worker 或 PAT 出问题时，
+  # 由 healthchecks 的掉线告警负责发现。
   workflow_dispatch:        # Cloudflare Worker 和手动运行都走这个
     inputs:
       dry_run:
@@ -33,9 +31,9 @@ jobs:
 
     steps:
       # ref 指定分支，checkout 拿的就是这个 job *开始跑时* 分支上的最新提交；
-      # 不指定的话拿的是运行被*创建*时的提交。迟到的 GitHub 备胎可能跟
-      # Cloudflare 那次几乎同时被创建，后到的那次虽然会排队等前一次跑完，
-      # 却仍然从前一次之前的旧 state 开始比对：同一条补货会通知两遍，
+      # 不指定的话拿的是运行被*创建*时的提交。两次运行创建得很近时（手动
+      # Run workflow 碰上定时那次、runner 排队），后到的那次虽然会排队等前一次
+      # 跑完，却仍然从前一次之前的旧 state 开始比对：同一条补货会通知两遍，
       # push 时还会跟前一次的 state 提交冲突。
       - uses: actions/checkout@v6
         with:

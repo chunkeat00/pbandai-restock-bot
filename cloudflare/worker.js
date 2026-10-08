@@ -1,51 +1,74 @@
-// Cloudflare Worker: the hourly trigger for every bot in this repo.
+// Cloudflare Worker: the clock for every bot in this repo.
 //
-// GitHub's own `schedule` drops runs under load, so each bot's real clock is
-// a cron trigger here that calls GitHub's workflow_dispatch API. Each workflow
-// keeps a `schedule` of its own as a fallback, on a different minute.
+// Each bot's workflow only runs when this Worker calls GitHub's
+// workflow_dispatch API. (The workflows used to carry a GitHub `schedule` as a
+// fallback; in three days of hourly runs it never once ran in an hour this
+// Worker had missed, it only produced duplicate runs, so it was removed.)
 //
-// Deploy: Cloudflare dashboard -> Workers & Pages -> pbandai-trigger ->
-// Edit code, replace everything with this file, Deploy.
-// Settings -> Trigger events needs one cron per minute listed in JOBS. After
-// adding a trigger, Deploy again: on 2026-09-03 a trigger added in Settings
-// showed a "Next" time but never fired until the Worker was redeployed.
+// Settings -> Trigger events needs exactly ONE cron trigger:
+//
+//     2-59/5 * * * *        (fires at :02 :07 :12 ... :57)
+//
+// Each tick dispatches whichever bots are due. They take turns, so no two ever
+// push their state to main at the same moment:
+//
+//     P-Bandai   :02 :32            every 30 min
+//     KGB        :07 :37            every 30 min
+//     Toymana    :12 :27 :42 :57    every 15 min — restocks most often of the
+//                                   three (31 times in its first 3 days)
+//
+// To change one bot's frequency, change its `every` to 5, 10, 15, 20, 30 or 60
+// (it must divide 60). `offset` must be one of the trigger's minutes — 2, 7,
+// 12, 17 ... (2 more than a multiple of 5) — or that bot never fires.
+//
+// Deploy: Workers & Pages -> pbandai-trigger -> Edit code, replace everything
+// with this file, Deploy. After changing triggers, Deploy again: trigger
+// changes take up to 15 minutes to propagate, and on 2026-09-03 a trigger
+// added in Settings never fired until the Worker was redeployed.
 // Settings -> Variables and Secrets needs GITHUB_PAT (type: Secret), a
 // fine-grained token for this one repo with Actions: Read and write.
 
 const REPO = "chunkeat00/pbandai-restock-bot";
 
-// Minute the trigger fires on -> workflow file to dispatch. Keyed on the minute
-// alone rather than the whole cron string, so a trigger re-typed with
-// different spacing still matches instead of silently doing nothing.
-const JOBS = {
-  "23": "check.yml",           // P-Bandai
-  "38": "kgb-check.yml",       // Kelab Gasing Beyblade
-  "46": "toymana-check.yml",   // Toymana
-};
+const BOTS = [
+  { workflow: "check.yml",         every: 30, offset: 2  },   // P-Bandai
+  { workflow: "kgb-check.yml",     every: 30, offset: 7  },   // Kelab Gasing Beyblade
+  { workflow: "toymana-check.yml", every: 15, offset: 12 },   // Toymana
+];
 
 export default {
-  async scheduled(event, env, ctx) {
-    const minute = String(event.cron || "").trim().split(/\s+/)[0];
-    const wf = JOBS[minute];
-    if (!wf) {
-      console.log(`no workflow for cron ${JSON.stringify(event.cron)}`);
-      return;
+  async scheduled(controller, env, ctx) {
+    // scheduledTime is the *planned* fire time, so this is the exact minute
+    // even when the invocation itself starts a few seconds late.
+    const minute = new Date(controller.scheduledTime).getUTCMinutes();
+
+    for (const b of BOTS) {
+      if (b.offset % 5 !== 2) console.log(`${b.workflow}: offset ${b.offset} is never a tick — it will not run`);
     }
 
-    const res = await fetch(
-      `https://api.github.com/repos/${REPO}/actions/workflows/${wf}/dispatches`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${env.GITHUB_PAT}`,
-          Accept: "application/vnd.github+json",
-          "User-Agent": "pbandai-restock-trigger",   // GitHub rejects requests without one
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ref: "main" }),
-      }
-    );
-    // Success is 204 No Content, so there is nothing to log on the happy path.
-    if (!res.ok) console.log(`${wf} dispatch failed: ${res.status} ${await res.text()}`);
+    const due = BOTS.filter(b => (minute - b.offset + 60) % b.every === 0);
+    if (!due.length) {
+      console.log(`:${String(minute).padStart(2, "0")} — nothing due`);
+      return;
+    }
+    await Promise.all(due.map(b => dispatch(b.workflow, env)));
   },
 };
+
+async function dispatch(workflow, env) {
+  const res = await fetch(
+    `https://api.github.com/repos/${REPO}/actions/workflows/${workflow}/dispatches`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.GITHUB_PAT}`,
+        Accept: "application/vnd.github+json",
+        "User-Agent": "pbandai-restock-trigger",   // GitHub rejects requests without one
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ref: "main" }),
+    }
+  );
+  // Success is 204 No Content, so there is nothing to log on the happy path.
+  if (!res.ok) console.log(`${workflow} dispatch failed: ${res.status} ${await res.text()}`);
+}

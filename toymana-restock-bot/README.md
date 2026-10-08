@@ -1,6 +1,6 @@
 # Toymana Restock Bot
 
-每小时检查 [Toymana](https://www.toymana.com/collections/beyblade) 的 Beyblade 分类，
+每 15 分钟检查一次 [Toymana](https://www.toymana.com/collections/beyblade) 的 Beyblade 分类，
 有**上新**或**补货**就发 Telegram 通知。
 
 **Toymana 是新加坡的店，价格是 SGD**，通知里显示成 `SG$26.95`。
@@ -78,7 +78,7 @@ https://www.toymana.com/products/...
 | 商品列表是空的 | 当失败，**不当成全部下架**，否则恢复时会把所有商品当补货轰一遍 |
 | 商品超过 `MAX_PAGES × 250` 件 | 当失败并提示调大 `MAX_PAGES`，**不会只读前面一部分** |
 | 只有部分分类失败 | 冻结失败的那些，其余照常；Telegram 在"挂掉"和"恢复"时各发一次 |
-| 全部分类都失败 | exit 1，state 一个字节都不动；GitHub 发失败邮件，healthchecks 收到 `/fail` |
+| 全部分类都失败 | state 一个字节都不动，不 ping healthchecks；运行仍是绿的、带 warning 标注。偶尔一次不用管，一直失败会在宽限期后告警 |
 
 Shopify 不返回商品总数，所以判断"抓全了没有"靠的是**最后一页不满 250 件**。
 满 250 就继续往下翻，直到出现不满的一页。
@@ -91,22 +91,21 @@ Shopify 不返回商品总数，所以判断"抓全了没有"靠的是**最后�
 （[`.github/workflows/toymana-check.yml`](../.github/workflows/toymana-check.yml)），
 Telegram 的两个 secret 跟另外两个 bot 共用，不用重新设。
 
-### 1. Cloudflare Worker：加 cron + 换代码
+### 1. Cloudflare Worker
 
-还是那个 Worker（`pbandai-trigger`）：
+还是那个 Worker（`pbandai-trigger`），三个 bot 共用：
 
 1. **Edit code**：整段换成 [`cloudflare/worker.js`](../cloudflare/worker.js)，**Deploy**
-2. **Settings → Trigger events**：加一条 `46 * * * *`
-3. **再 Deploy 一次**。这一步别省：2026-09-03 KGB 的 cron 就是因为只加了触发器、
-   没重新部署，显示了 Next 时间却从来没触发过
+2. **Settings → Trigger events**：只留**一条** `2-59/5 * * * *`，其他的删掉
+3. **再 Deploy 一次**。这一步别省：触发器改动最多要 15 分钟才生效，
+   而且 2026-09-03 KGB 的 cron 只加了触发器、没重新部署，显示了 Next 时间却从来没触发过
 
-`worker.js` 是三个 bot 共用的唯一一份 Worker 代码。新版按**分钟数**匹配，
-不再要求 cron 字符串跟代码里一字不差，触发器格式写得不一样也能对上。
+同一个 PAT、同一个 Worker、同一个 repo，不用建新的。
 
 ### 2. 掉线告警（可选，但建议）
 
 healthchecks.io 上**新建一个 check**（不要复用另外两个 bot 的，否则一个挂了
-另一个会替它报平安）：Period `1 hour`、Grace `1 hour`。把 ping URL 存成
+另一个会替它报平安）：Period `15 minutes`、Grace `45 minutes`（一小时内一次成功都没有才告警）。把 ping URL 存成
 GitHub Secret **`TOYMANA_HEALTHCHECK_URL`**。不设就是关闭，不影响运行。
 
 ### 3. 换分类、加别的店（可选）
@@ -121,21 +120,25 @@ GitHub Secret **`TOYMANA_HEALTHCHECK_URL`**。不设就是关闭，不影响运�
 
 ## 六、触发时刻表
 
-三个 bot 的六个触发点错开排在一小时里，每次运行十几秒就结束：
+唯一的时钟是 Cloudflare Worker：每 5 分钟醒一次，三个 bot 轮流跑，
+**P-Bandai 和 KGB 每 30 分钟、Toymana 每 15 分钟**，彼此错开 5 分钟：
 
-| 分钟 | 谁 | 什么 |
-|---|---|---|
-| `:08` | GitHub schedule | KGB **备胎** |
-| `:16` | GitHub schedule | toymana **备胎** |
-| `:23` | Cloudflare Worker | pbandai **主力** |
-| `:38` | Cloudflare Worker | KGB **主力** |
-| `:46` | Cloudflare Worker | toymana **主力** |
-| `:53` | GitHub schedule | pbandai **备胎** |
+| 分钟 | bot |
+|---|---|
+| `:02` `:32` | P-Bandai（每 30 分钟） |
+| `:07` `:37` | KGB（每 30 分钟） |
+| `:12` `:27` `:42` `:57` | Toymana（每 15 分钟，三个站里补货最频繁） |
 
-Cloudflare 免费版每个账号最多 **5 条 cron**，现在用了 3 条。
+workflow 里没有 GitHub `schedule` 了。它在高负载时会**直接丢弃**任务（实测命中率 13%），
+2026-10-08 之前留着当备胎，但三天里一次都没补上过 Cloudflare 漏掉的运行，
+全是重复跑，所以拿掉了（详见 [pbandai 的 README](../README.md)）。
 
-三个 workflow 都会往 `main` 推 state，push 步骤都有 **rebase 重试**（最多 3 次）。
-各自写各自的 state 文件，所以 rebase 不会冲突。
+想改某个 bot 的频率，改 [`cloudflare/worker.js`](../cloudflare/worker.js) 里它那一行的
+`every`（5、10、15、20、30 或 60 分钟）。Cloudflare cron 只用了 1 条（免费版上限 5 条）。
+
+三个 workflow 都会往 `main` 推 state，push 步骤都有 **rebase 重试**（最多 3 次），
+各自写各自的 state 文件，所以 rebase 不会冲突。state **只在有变化时才提交**，
+光是时间戳变了不算，不然每次运行都会多一个没意义的 commit。
 
 ---
 

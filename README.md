@@ -1,6 +1,6 @@
 # P-Bandai Restock Bot
 
-每小时检查 P-Bandai 的商品列表，有**上新**或**补货**就发 Telegram 通知。
+每 30 分钟检查一次 P-Bandai 的商品列表，有**上新**或**补货**就发 Telegram 通知。
 只通知**能下单**的商品（PRE-ORDER / IN STOCK / COMING SOON），
 OUT OF STOCK 和 PRE-ORDER CLOSED 会自动过滤掉。
 
@@ -121,20 +121,35 @@ P-Bandai 的列表页 HTML 里本来就嵌着完整的搜索结果 JSON（`PRELO
 会直接把任务丢掉不跑（本 repo 实测：`0 * * * *` 触发 0/5 次，`23 * * * *` 2/15 次）。
 付费账号也一样，这不是免费额度的问题——public repo 的 Actions 本来就无限免费。
 
-真正在按小时干活的是一个 **Cloudflare Worker**，每小时 `:23` 调 GitHub API
-触发 `workflow_dispatch`。dispatch 事件不走那个会丢包的排程队列，叫了就跑。
-workflow 里的 `schedule` 保留在 `:53` 当兜底，Cloudflare 挂了还有一层。
+所以 workflow 里**没有** `schedule`，唯一的时钟是一个 **Cloudflare Worker**：
+每 5 分钟醒一次，三个 bot 轮流调 GitHub API 触发 `workflow_dispatch`：
+**P-Bandai 和 KGB 每 30 分钟、Toymana 每 15 分钟**。dispatch 事件不走那个会丢包的排程队列，叫了就跑。
+
+| 分钟 | bot |
+|---|---|
+| `:02` `:32` | P-Bandai（每 30 分钟） |
+| `:07` `:37` | KGB（每 30 分钟） |
+| `:12` `:27` `:42` `:57` | Toymana（每 15 分钟，三个站里补货最频繁） |
+
+错开 5 分钟是为了让三个 bot 不会同时往 main 推 state。
+
+（2026-10-08 之前是每个 bot 每小时一次，另外每个 workflow 还有一个 GitHub `schedule`
+当备胎。10-05 到 10-08 三天里，三个备胎合计跑了 34 次，**没有一次**是 Cloudflare
+漏掉、靠它补上的，全是重复跑，所以拿掉了。）
 
 Worker 代码在 [`cloudflare/worker.js`](cloudflare/worker.js)
 （Cloudflare Dashboard → Workers & Pages → `pbandai-trigger`）。这个 repo 里的
-**三个 bot 共用这一个 Worker**，按触发的分钟数分别 dispatch 各自的 workflow。
+**三个 bot 共用这一个 Worker**，按触发的分钟数决定这一轮该谁跑。
 改代码就改那个文件，然后整段粘贴进 Cloudflare 编辑器、Deploy。
+
+**想改某个 bot 的频率**，改 `worker.js` 里它那一行的 `every`
+（5、10、15、20、30 或 60 分钟），别的不用动。
 
 Worker 的 Settings 里要配两样（**加了 cron 之后要再 Deploy 一次**，否则只显示 Next 时间、不会真的触发）：
 
 | 项目 | 值 |
 |---|---|
-| Cron Triggers | `23 * * * *`（pbandai）、`38 * * * *`（KGB）、`46 * * * *`（Toymana） |
+| Cron Triggers | **只要一条**：`2-59/5 * * * *`（三个 bot 共用，每 5 分钟一次） |
 | Variables and Secrets | `GITHUB_PAT`（类型选 **Secret**，不是 Text） |
 
 `GITHUB_PAT` 是 GitHub 的 **fine-grained PAT**（Settings → Developer settings →
@@ -148,14 +163,16 @@ Personal access tokens → Fine-grained tokens）：Repository access 只勾
 - 成功返回 **204 No Content**，没有 body，别以为失败了
 - Worker 里**不要写 `fetch` handler**。写了等于开一个公开网址，谁访问一下就触发一次。
   编辑器右边 Preview 面板报 `No fetch handler!` 是**正常的**，不是错误
-- 改完代码要点 **Deploy** 才生效；测试用编辑器上方的 **Schedule** 标签手动触发
+- 改完代码要点 **Deploy** 才生效；测试用编辑器上方的 **Schedule** 标签手动触发。
+  Worker 按**分钟数**决定该谁跑，手动触发时如果那一分钟没轮到任何 bot，
+  日志会显示 `nothing due`，这是正常的
 
 **⚠️ PAT 会过期。** 到期那天 dispatch 开始返回 401，Worker 只在 console 里打一行日志，
-**不会通知你**，bot 就这么悄无声息地停了（GitHub 那个 `:53` 的兜底还在，
-但那玩意儿本来就十次有八次不跑）。到期日记进日历，换 token 时只需要更新
+**不会通知你**，而且现在没有 GitHub 备胎了，**三个 bot 会一起停**，
+只能靠下面的掉线告警发现。到期日记进日历，换 token 时只需要更新
 Worker 的 `GITHUB_PAT` secret，别的都不用动。
 
-怎么确认它还活着：GitHub Actions 页面看运行记录，正常情况下每小时应该有一条
+怎么确认它还活着：GitHub Actions 页面看运行记录，正常情况下每 30 分钟应该有一条
 `workflow_dispatch`。连续几小时空白就是 Worker 或 PAT 出问题了。不想靠肉眼盯，
 就配下面的掉线告警。
 
@@ -168,28 +185,37 @@ workflow **跑了并且失败**时才发——彻底没跑是不会有任何动�
 解法是反过来：**让脚本定时报平安，超时没报就告警**。用 healthchecks.io（免费）：
 
 1. 注册 → **Add Check** → 起名 `pbandai-restock`
-2. **Period** 设 `1 hour`，**Grace Time** 设 `1 hour`
-   （这样偶尔漏一次不会吵你，连续 2 小时没动静才发邮件）
+2. **Period** 设 `30 minutes`，**Grace Time** 设 `30 minutes`
+   （偶尔漏一次不会吵你，**一小时内一次成功都没有**才告警。
+   设成 `1 hour` / `1 hour` 也能用，只是要两小时没动静才告警）
 3. 复制它给的 ping URL（形如 `https://hc-ping.com/<uuid>`）
 4. 存进 GitHub repo → Settings → Secrets and variables → Actions → **Secrets** →
    `HEALTHCHECK_URL`
 
 **这个 URL 要当密码看**，谁拿到都能替你报平安，把告警骗过去，所以放 Secrets 不是 Variables。
 
-脚本会打三种 ping：
+脚本只在这几种情况下 ping：
 
-| 时机 | ping | 作用 |
+| 这次运行 | ping | 结果 |
 |---|---|---|
-| 开跑 | `/start` | 让 healthchecks 知道这次跑了多久 |
-| `exit 0` | 裸 URL | 报平安 |
-| 非 0 或崩溃 | `/fail` | 立刻告警，body 带上 exit code 或完整 traceback |
+| 正常跑完（包括只有部分站点读不到） | 裸 URL | 报平安 |
+| **所有站点都读不到** | **不 ping** | 见下面 |
+| 配置写错（exit 2）或程序崩溃 | `/fail` | 立刻告警，body 带上 exit code 或完整 traceback |
+
+"所有站点都读不到"故意不报警，也不报平安。这种情况通常是对方网站或网络抖了一下，
+下一次就好了（2026-10-06 10:48 就有一次，前后两次都正常）。检查得越频繁，
+这种偶发情况就越多，如果每次都立刻告警，你很快就会开始无视告警。
+如果是一直读不到（比如 P-Bandai 改版），ping 停了，过了宽限期 healthchecks 会自己变红。
+这次运行在 GitHub 上仍然是绿的，但会带一个 **warning 标注**，点进去能看到。
+
+**程序崩溃**就不一样了，那是 bug，所以照样立刻 `/fail`。
 
 覆盖到的情况：
 
 | 出了什么事 | 谁来告诉你 |
 |---|---|
 | PAT 过期 / Worker 挂了 / runner 没起来 | **healthchecks 超时告警**（只有这个能报） |
-| p-bandai 改版导致抓不到（exit 1） | `/fail` ping + GitHub 失败邮件 |
+| 所有站点一直读不到（比如 P-Bandai 改版） | **healthchecks 宽限期过后告警**（偶尔一次读不到不会吵你） |
 | 配置写错（exit 2） | `/fail` ping + GitHub 失败邮件 |
 | Python 崩溃 | `/fail` ping（body 里有 traceback）+ GitHub 失败邮件 |
 
@@ -204,23 +230,23 @@ workflow **跑了并且失败**时才发——彻底没跑是不会有任何动�
 
 ## 三、注意事项
 
-- **免费额度**：public repo 的 Actions 免费无限。private repo 每月 2000 分钟，
-  这个 bot 每小时约 1-2 分钟 ≈ 每月 900-1400 分钟，够但偏紧。**建议设成 public**
-  （没有敏感信息，token 在 Secrets 里）。
-- **每小时那一下是 Cloudflare Worker 打过来的**，不是 GitHub 的 cron。
-  workflow 里 `:53` 那条 `schedule` 只是兜底，指望不上。原因和配置见上面
-  「外部定时触发」。所以运行记录里绝大多数是 `workflow_dispatch` 而不是 `schedule`，
-  这是**正常的**。
-- **两边都触发也不会打架**：workflow 里的 `concurrency` 会让后到的那次排队等
-  前一次跑完；checkout 指定了 `ref`，后到的那次拿的是前一次写完之后的 state。
-  （2026-10-06 之前没指定 `ref`，checkout 拿的是运行*创建*时的提交：两次几乎同时
-  被创建的话，后一次会从旧 state 开始比对，同一条补货可能通知两遍。）
+- **免费额度**：public repo 的 Actions 免费无限，**这个 repo 必须保持 public**。
+  private repo 每月只有 2000 分钟，而且每次运行至少按 1 分钟算：三个 bot 加起来
+  每小时 8 次，一个月约 5800 次运行，远超免费额度。（没有敏感信息，token 都在 Secrets 里。）
+- **每次运行都是 Cloudflare Worker 打过来的** `workflow_dispatch`，workflow 里
+  没有 `schedule`。原因和配置见上面「外部定时触发」。
+- **两次运行挨得很近也不会打架**（比如手动 Run workflow 刚好碰上定时那次）：
+  `concurrency` 会让后到的那次排队等前一次跑完；checkout 指定了 `ref`，后到的那次
+  拿的是前一次写完之后的 state。（2026-10-06 之前没指定 `ref`，checkout 拿的是运行
+  *创建*时的提交：两次几乎同时被创建的话，后一次会从旧 state 开始比对，
+  同一条补货可能通知两遍。）
+- **state 只在有变化时才提交**。每次运行都会刷新 `last_seen` 和 `updated_at`，
+  但如果只有这两个时间戳变了，文件就不写，workflow 也就没东西可提交。
+  不然三个 bot 加起来一天会产生近 200 个 commit。所以这两个字段
+  现在的意思是"上一次 state 有实质变化的时间"。
 - **仍然不保证分钟级准时**：Cloudflare 的 cron 偶尔也会晚个一两分钟，
   只是不像 GitHub 那样整点直接丢掉不跑。真要抢秒杀级别的限量，
-  这套（连同任何一小时一次的方案）都不够，得自己拿机器盯。
-- **repo 60 天没活动**会自动停掉 `schedule`。不过 bot 每次跑都会 commit
-  `state/seen.json`，活动一直有，实际不会触发这条；就算真被停了，
-  Cloudflare 的 `workflow_dispatch` 也不受影响，照跑。
+  这套（连同任何定时轮询的方案）都不够，得自己拿机器盯。
 - **抓取失败按站点隔离**：一个站算"抓成功"必须同时满足：每一页都有
   `PRELOAD_DATA`、翻页过程中 `totalCount` 没变、抓到的件数**正好等于** `totalCount`、
   而且不是 0（系列页永远会列出东西，哪怕全是截单的）。任何一条不满足 →
@@ -228,14 +254,16 @@ workflow **跑了并且失败**时才发——彻底没跑是不会有任何动�
   误报一堆补货），其余站照常比对、照常发通知。**一个站挂掉不会连累别的站。**
   失败站点记在 state 的 `failed_regions` 字段里。
 - **部分失败不算运行失败**（exit 0）。好的站点已经正常比对并通知过了，
-  Telegram 也已经告诉你哪个站挂了，再让 healthchecks 每小时变红没有新信息。
-  Telegram 只在「挂掉」和「恢复」两个时刻各发一次，不会每小时刷屏。
-- **只有全部站点都抓不到才 exit 1**，且 state 一个字节都不动。这时 GitHub 会发
-  workflow failed 邮件，healthchecks 也会收到 `/fail` ping。
+  Telegram 也已经告诉你哪个站挂了，再让 healthchecks 每次都变红没有新信息。
+  Telegram 只在「挂掉」和「恢复」两个时刻各发一次，不会每次运行都刷屏。
+- **全部站点都抓不到**：state 一个字节都不动，不 ping healthchecks，
+  运行本身仍是绿的、带一个 warning 标注。偶尔一次不用管；一直这样的话，
+  healthchecks 过了宽限期会告警（见上面「掉线告警」）。
 - **bot 悄悄停掉是最危险的情况**（PAT 过期、Worker 挂了），因为没有任何东西会报错。
   配了「掉线告警」才有兜底，强烈建议配上。
 - **AU 站目前 0 件可下单**（21 件全部售完/预购截止），所以短期内只会收到 SG 的通知。
   这是正常的，不是 bot 坏了。
+
 ### 抓取逻辑已在真实页面验证（2026-10-05）
 
 | 页面 | `totalCount` | 抓到 | 翻页 | 可下单 |

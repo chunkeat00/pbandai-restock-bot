@@ -66,7 +66,8 @@ REQUEST_DELAY = float(os.environ.get("REQUEST_DELAY", "0.5"))
 
 # Dead man's switch (healthchecks.io ping URL). Optional — unset means off.
 # The only thing that catches a *silent* stop: expired PAT, dead trigger,
-# runner that never started. Nothing in here can report those.
+# runner that never started. Nothing in here can report those. It also catches
+# the site staying unreadable: such runs send no ping (see the end of this file).
 HEALTHCHECK_URL = os.environ.get("HEALTHCHECK_URL", "").strip()
 
 UA = (
@@ -253,6 +254,31 @@ def save_state(state: dict) -> None:
     )
 
 
+# A run in which nothing at all could be read. Not worth an immediate alarm:
+# see the end of this file.
+UNREADABLE = 3
+
+
+def fingerprint(state: dict) -> str:
+    """The state minus what changes on every run (last_seen, updated_at). A run
+    that only re-confirmed what we already knew compares equal, writes nothing,
+    and so leaves the workflow nothing to commit — at several runs an hour,
+    committing timestamps alone would mean dozens of commits a day per bot."""
+    items = {k: {f: v for f, v in r.items() if f != "last_seen"}
+             for k, r in (state.get("items") or {}).items()}
+    rest = {k: v for k, v in state.items() if k not in ("items", "updated_at")}
+    return json.dumps([items, rest], sort_keys=True, ensure_ascii=False)
+
+
+def on_disk_fingerprint() -> str | None:
+    """Fingerprint of the state file as committed — before this run's
+    migrations or changes — or None if there is no readable file."""
+    try:
+        return fingerprint(json.loads(STATE_FILE.read_text(encoding="utf-8")))
+    except Exception:
+        return None
+
+
 # --------------------------------------------------------------------------- #
 # Telegram
 # --------------------------------------------------------------------------- #
@@ -383,8 +409,12 @@ def main() -> int:
 
     if not good:
         print("no collection read cleanly — state untouched", file=sys.stderr)
-        return 1
+        # Annotates the run's summary page; the run itself stays green.
+        print("::warning::nothing could be read this run — state untouched",
+              flush=True)
+        return UNREADABLE
 
+    before = on_disk_fingerprint()
     state = load_state()
     known: dict = state.get("items", {})
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -451,7 +481,11 @@ def main() -> int:
     state["items"] = known
     state["initialized"] = True
     state["failed_groups"] = bad
-    save_state(state)
+    if fingerprint(state) != before:
+        save_state(state)
+    else:
+        print("nothing changed beyond timestamps — state file left as is",
+              flush=True)
 
     print(f"[done] new={len(new_items)} back={len(back_items)} "
           f"tracked={len(known)} failed={bad or '-'}", flush=True)
@@ -459,11 +493,17 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    hc_ping("/start")
     try:
         code = main()
     except BaseException:
+        # A crash is a bug, not a bad minute: say so at once.
         hc_ping("/fail", traceback.format_exc())
         raise
+    if code == UNREADABLE:
+        # Every site unreadable this run. Usually a blip on their side or ours
+        # that the next run does not see — so no alarm, and
+        # no success ping either. If it keeps happening, the missing pings turn
+        # the dead man's switch red once its grace period runs out.
+        sys.exit(0)
     hc_ping("" if code == 0 else "/fail", f"exit={code}")
     sys.exit(code)
