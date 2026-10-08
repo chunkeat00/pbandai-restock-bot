@@ -12,7 +12,7 @@
 // Each tick dispatches whichever bots are due. They take turns, so no two ever
 // push their state to main at the same moment:
 //
-//     P-Bandai   :02 :32            every 30 min
+//     P-Bandai   :17 :47            every 30 min
 //     KGB        :07 :37            every 30 min
 //     Toymana    :12 :27 :42 :57    every 15 min — restocks most often of the
 //                                   three (31 times in its first 3 days)
@@ -33,7 +33,7 @@
 const REPO = "chunkeat00/pbandai-restock-bot";
 
 const BOTS = [
-  { workflow: "check.yml",         every: 30, offset: 2  },   // P-Bandai
+  { workflow: "check.yml",         every: 30, offset: 17 },   // P-Bandai
   { workflow: "kgb-check.yml",     every: 30, offset: 7  },   // Kelab Gasing Beyblade
   { workflow: "toymana-check.yml", every: 15, offset: 12 },   // Toymana
 ];
