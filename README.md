@@ -145,7 +145,7 @@ Worker 代码在 [`cloudflare/worker.js`](cloudflare/worker.js)
 **想改某个 bot 的频率**，改 `worker.js` 里它那一行的 `every`
 （5、10、15、20、30 或 60 分钟），别的不用动。
 
-Worker 的 Settings 里要配两样（**加了 cron 之后要再 Deploy 一次**，否则只显示 Next 时间、不会真的触发）：
+Worker 的 Settings 里要配两样（**加了 cron 之后要再 Deploy 一次**，否则只显示 Next 时间、不会真的触发。部署后可能要**一个小时左右**才开始触发，Cloudflare 自己说的 15 分钟不准）：
 
 | 项目 | 值 |
 |---|---|

@@ -22,9 +22,11 @@
 // 12, 17 ... (2 more than a multiple of 5) — or that bot never fires.
 //
 // Deploy: Workers & Pages -> pbandai-trigger -> Edit code, replace everything
-// with this file, Deploy. After changing triggers, Deploy again: trigger
-// changes take up to 15 minutes to propagate, and on 2026-09-03 a trigger
-// added in Settings never fired until the Worker was redeployed.
+// with this file, Deploy. After changing triggers, Deploy again, then give it
+// an hour before deciding it is broken. Cloudflare says trigger changes take
+// up to 15 minutes; twice they took far longer. On 2026-09-03 a new trigger
+// never fired until the Worker was redeployed; on 2026-10-08 this one was set
+// around 10:05 UTC, redeployed around 10:20, and first fired at 11:27.
 // Settings -> Variables and Secrets needs GITHUB_PAT (type: Secret), a
 // fine-grained token for this one repo with Actions: Read and write.
 

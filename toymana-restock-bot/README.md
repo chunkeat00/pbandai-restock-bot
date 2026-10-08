@@ -97,8 +97,10 @@ Telegram 的两个 secret 跟另外两个 bot 共用，不用重新设。
 
 1. **Edit code**：整段换成 [`cloudflare/worker.js`](../cloudflare/worker.js)，**Deploy**
 2. **Settings → Trigger events**：只留**一条** `2-59/5 * * * *`，其他的删掉
-3. **再 Deploy 一次**。这一步别省：触发器改动最多要 15 分钟才生效，
-   而且 2026-09-03 KGB 的 cron 只加了触发器、没重新部署，显示了 Next 时间却从来没触发过
+3. **再 Deploy 一次**，然后**等一个小时再判断有没有问题**。Cloudflare 说触发器改动
+   最多 15 分钟生效，实测慢得多：2026-09-03 KGB 的 cron 只加了触发器、没重新部署，
+   显示了 Next 时间却从来没触发过；2026-10-08 改成 `2-59/5` 并重新部署后，
+   又过了一个多小时才第一次触发
 
 同一个 PAT、同一个 Worker、同一个 repo，不用建新的。
 
