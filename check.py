@@ -68,6 +68,8 @@ CHAT_IDS = [
 STATE_FILE = Path(os.environ.get("STATE_FILE", "state/seen.json"))
 MAX_PAGES = int(os.environ.get("MAX_PAGES", "50"))
 REQUEST_DELAY = float(os.environ.get("REQUEST_DELAY", "0.5"))
+# How long to wait before asking again when a listing comes back empty.
+ZERO_RECHECK_DELAY = float(os.environ.get("ZERO_RECHECK_DELAY", "15"))
 ALERT_ON_ALL = os.environ.get("ALERT_ON_ALL", "") == "1"
 DRY_RUN = os.environ.get("DRY_RUN", "") == "1"
 
@@ -305,11 +307,27 @@ def scrape_url(url: str) -> tuple[list[dict], bool]:
             break
 
     if not total:
-        # A series page always lists *something* — P-Bandai keeps ended
-        # products on it. Zero is a broken response, not an empty shelf.
-        print(f"     [{region}] totalCount=0 — treating as failure",
-              file=sys.stderr)
-        return [], False
+        # An empty list is ambiguous. SG stopped listing ended products again
+        # around 2026-10-09, so empty is simply what it shows once its last
+        # pre-order closes — and reading that as a failure would freeze those
+        # products as orderable, so a later reopen would never be announced.
+        # But an empty answer is also what a search backend gives when it
+        # hiccups, and believing one of those would mark everything gone and
+        # announce it all as restocked a run later. So ask again: one empty
+        # answer can be a glitch, two in a row is an empty shelf.
+        time.sleep(ZERO_RECHECK_DELAY)
+        page = fetch(set_offset(url, 0))
+        parsed = parse_results(page) if page is not None else None
+        if parsed is None:
+            print(f"     [{region}] empty, then no PRELOAD_DATA — treating as "
+                  "failure", file=sys.stderr)
+            return [], False
+        if parsed[1]:
+            print(f"     [{region}] empty, then {parsed[1]} on recheck — not "
+                  "trusting this read", file=sys.stderr)
+            return [], False
+        print(f"     [{region}] empty twice in a row — nothing listed", flush=True)
+        return [], True
 
     if len(found) != total:
         hint = (f" (MAX_PAGES={MAX_PAGES} × limit={limit} is too small)"
