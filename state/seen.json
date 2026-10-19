@@ -19,7 +19,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-09T16:17:20+00:00",
+      "last_seen": "2026-10-19T16:17:25+00:00",
       "present": true,
       "price": "SG$240.00",
       "region": "sg",
@@ -32,7 +32,7 @@
         "PRE-ORDER"
       ],
       "last_seen": "2026-10-09T16:17:20+00:00",
-      "present": true,
+      "present": false,
       "price": "SG$53.00",
       "region": "sg",
       "title": "WALLSTAR ONE PIECE MONKEY D. LUFFY GEAR5 & RORONOA ZORO SET【WITH GIFT】",
@@ -44,7 +44,7 @@
         "PRE-ORDER"
       ],
       "last_seen": "2026-10-09T16:17:20+00:00",
-      "present": true,
+      "present": false,
       "price": "SG$91.00",
       "region": "sg",
       "title": "VARIABLE ACTION HEROES ONE PIECE PORTGAS D. ACE",
@@ -76,5 +76,5 @@
     }
   },
   "schema": 3,
-  "updated_at": "2026-10-09T16:17:20+00:00"
+  "updated_at": "2026-10-19T16:17:25+00:00"
 }
