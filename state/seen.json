@@ -7,7 +7,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-27T03:17:24+00:00",
+      "last_seen": "2026-10-27T09:17:23+00:00",
       "present": true,
       "price": "AU$148.00",
       "region": "au",
@@ -32,7 +32,7 @@
         "PRE-ORDER"
       ],
       "last_seen": "2026-10-27T03:17:24+00:00",
-      "present": true,
+      "present": false,
       "price": "SG$71.00",
       "region": "sg",
       "title": "LUFFY’s ARTCANVAS 1/8 -20th Anniversary-",
@@ -43,7 +43,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-10-27T03:17:24+00:00",
+      "last_seen": "2026-10-27T09:17:23+00:00",
       "present": true,
       "price": "SG$240.00",
       "region": "sg",
@@ -100,5 +100,5 @@
     }
   },
   "schema": 3,
-  "updated_at": "2026-10-27T03:17:25+00:00"
+  "updated_at": "2026-10-27T09:17:23+00:00"
 }
