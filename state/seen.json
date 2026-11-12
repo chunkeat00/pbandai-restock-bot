@@ -7,7 +7,7 @@
       "flags": [
         "PRE-ORDER CLOSED"
       ],
-      "last_seen": "2026-11-01T16:17:54+00:00",
+      "last_seen": "2026-11-12T03:17:25+00:00",
       "present": false,
       "price": "AU$148.00",
       "region": "au",
@@ -43,12 +43,36 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-11-01T16:17:54+00:00",
+      "last_seen": "2026-11-12T03:17:25+00:00",
       "present": true,
       "price": "SG$240.00",
       "region": "sg",
       "title": "PORTRAIT. OF. PIRATES ONE PIECE “SA-MAXIMUM”MONKEY.D.LUFFY GEAR4 BOUNCE-MAN 10TH LIMITED VER.",
       "url": "https://p-bandai.com/sg/item/A2904536001"
+    },
+    "sg:A2907986001": {
+      "first_seen": "2026-11-12T03:17:25+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-11-12T03:17:25+00:00",
+      "present": true,
+      "price": "SG$230.00",
+      "region": "sg",
+      "title": "VARIABLE ACTION HEROES ONE PIECE \"WHITEBEARD\" EDWARD NEWGATE VER.1.5",
+      "url": "https://p-bandai.com/sg/item/A2907986001"
+    },
+    "sg:A2909282001": {
+      "first_seen": "2026-11-12T03:17:25+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-11-12T03:17:25+00:00",
+      "present": true,
+      "price": "SG$573.00",
+      "region": "sg",
+      "title": "PORTRAIT.OF.PIRATES ONE PIECE “ELB-MAXIMUM”LOKI",
+      "url": "https://p-bandai.com/sg/item/A2909282001"
     },
     "sg:A2912578001": {
       "first_seen": "2026-10-07T03:24:29+00:00",
@@ -73,6 +97,18 @@
       "region": "sg",
       "title": "VARIABLE ACTION HEROES ONE PIECE PORTGAS D. ACE",
       "url": "https://p-bandai.com/sg/item/A2913346001"
+    },
+    "sg:A2922123001": {
+      "first_seen": "2026-11-12T03:17:25+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-11-12T03:17:25+00:00",
+      "present": true,
+      "price": "SG$64.00",
+      "region": "sg",
+      "title": "WALLSTAR ONE PIECE MONKEY D. LUFFY & NAMI SET (VER. ELBAPH)【WITH GIFT】",
+      "url": "https://p-bandai.com/sg/item/A2922123001"
     },
     "sg:AZ005736001": {
       "first_seen": "2026-08-27T03:24:11+00:00",
@@ -100,5 +136,5 @@
     }
   },
   "schema": 3,
-  "updated_at": "2026-11-01T16:17:54+00:00"
+  "updated_at": "2026-11-12T03:17:26+00:00"
 }
