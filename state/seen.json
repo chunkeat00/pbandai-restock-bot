@@ -14,6 +14,18 @@
       "title": "LUFFY’s ARTCANVAS 1/8 -20th Anniversary-",
       "url": "https://p-bandai.com/au/item/A2870005001"
     },
+    "au:A2870131001": {
+      "first_seen": "2026-11-19T09:17:35+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-11-19T09:17:35+00:00",
+      "present": true,
+      "price": "AU$216.00",
+      "region": "au",
+      "title": "LUFFY’s ONE PIECE × NBA 1/8 -ALL NBA TEAMS-",
+      "url": "https://p-bandai.com/au/item/A2870131001"
+    },
     "sg:A2866726003": {
       "first_seen": "2026-10-06T03:21:58+00:00",
       "flags": [
@@ -37,6 +49,18 @@
       "region": "sg",
       "title": "LUFFY’s ARTCANVAS 1/8 -20th Anniversary-",
       "url": "https://p-bandai.com/sg/item/A2870005001"
+    },
+    "sg:A2870131001": {
+      "first_seen": "2026-11-19T09:17:35+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-11-19T09:17:35+00:00",
+      "present": true,
+      "price": "SG$106.00",
+      "region": "sg",
+      "title": "LUFFY’s ONE PIECE × NBA 1/8 -ALL NBA TEAMS-",
+      "url": "https://p-bandai.com/sg/item/A2870131001"
     },
     "sg:A2904536001": {
       "first_seen": "2026-10-07T03:24:29+00:00",
@@ -67,7 +91,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-11-18T16:17:18+00:00",
+      "last_seen": "2026-11-19T09:17:35+00:00",
       "present": true,
       "price": "SG$573.00",
       "region": "sg",
@@ -136,5 +160,5 @@
     }
   },
   "schema": 3,
-  "updated_at": "2026-11-18T16:17:18+00:00"
+  "updated_at": "2026-11-19T09:17:40+00:00"
 }
