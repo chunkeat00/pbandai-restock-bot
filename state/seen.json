@@ -19,7 +19,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-11-20T02:47:38+00:00",
+      "last_seen": "2026-11-20T03:17:30+00:00",
       "present": true,
       "price": "AU$216.00",
       "region": "au",
@@ -32,7 +32,7 @@
         "PRE-ORDER"
       ],
       "last_seen": "2026-11-20T02:47:38+00:00",
-      "present": true,
+      "present": false,
       "price": "AU$110.00",
       "region": "au",
       "title": "ONE PIECE CARD GAME ONE PIECE Heroines Precious Set",
@@ -67,7 +67,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-11-20T02:47:38+00:00",
+      "last_seen": "2026-11-20T03:17:30+00:00",
       "present": true,
       "price": "SG$106.00",
       "region": "sg",
@@ -103,7 +103,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-11-20T02:47:38+00:00",
+      "last_seen": "2026-11-20T03:17:30+00:00",
       "present": true,
       "price": "SG$573.00",
       "region": "sg",
@@ -172,5 +172,5 @@
     }
   },
   "schema": 3,
-  "updated_at": "2026-11-20T02:47:39+00:00"
+  "updated_at": "2026-11-20T03:17:30+00:00"
 }
