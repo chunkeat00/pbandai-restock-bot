@@ -19,7 +19,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-11-20T03:17:30+00:00",
+      "last_seen": "2026-11-23T03:18:07+00:00",
       "present": true,
       "price": "AU$216.00",
       "region": "au",
@@ -67,7 +67,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-11-20T03:17:30+00:00",
+      "last_seen": "2026-11-23T03:18:07+00:00",
       "present": true,
       "price": "SG$106.00",
       "region": "sg",
@@ -103,7 +103,7 @@
       "flags": [
         "PRE-ORDER"
       ],
-      "last_seen": "2026-11-20T03:17:30+00:00",
+      "last_seen": "2026-11-23T03:18:07+00:00",
       "present": true,
       "price": "SG$573.00",
       "region": "sg",
@@ -133,6 +133,18 @@
       "region": "sg",
       "title": "VARIABLE ACTION HEROES ONE PIECE PORTGAS D. ACE",
       "url": "https://p-bandai.com/sg/item/A2913346001"
+    },
+    "sg:A2918589001": {
+      "first_seen": "2026-11-23T03:18:07+00:00",
+      "flags": [
+        "PRE-ORDER"
+      ],
+      "last_seen": "2026-11-23T03:18:07+00:00",
+      "present": true,
+      "price": "SG$211.00",
+      "region": "sg",
+      "title": "PORTRAIT.OF.PIRATES ONE PIECE \"ELEVATED BOOST\" NAMI",
+      "url": "https://p-bandai.com/sg/item/A2918589001"
     },
     "sg:A2922123001": {
       "first_seen": "2026-11-12T03:17:25+00:00",
@@ -172,5 +184,5 @@
     }
   },
   "schema": 3,
-  "updated_at": "2026-11-20T03:17:30+00:00"
+  "updated_at": "2026-11-23T03:18:08+00:00"
 }
